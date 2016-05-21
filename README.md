@@ -20,4 +20,4 @@ Select the downloaded zip file.
 
 Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution Environment.
 
-![Create Project](/pics/create01.png?raw=true)
+![Create Project](/pics/create-proj01.png?raw=true)
