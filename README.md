@@ -1,4 +1,4 @@
-# LDE NodeMCU Integration
+# LDT NodeMCU Integration
 
 This project integrates NodeMCU support in Lua Development Tools (LDT) as a new Execution Environment.
 
@@ -21,3 +21,7 @@ Select the downloaded zip file.
 Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution Environment.
 
 ![Create Project](/pics/create-proj01.png?raw=true)
+
+##Links
+https://wiki.eclipse.org/LDT/User_Area/Tutorial/Create_a_simple_Execution_Environment
+https://wiki.eclipse.org/LDT/User_Area/Execution_Environment_file_format
