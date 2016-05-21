@@ -16,9 +16,10 @@ Download the zip file in the "release" directory of your desired NodeMCU Version
 Open LDT and goto Preferences. On the left side choose "Lua".
 
 Click on "Execution Environment" and then the "Add..." button.
+
 ![Add zip](/pics/add-ee01.png?raw=true)
 
-Select the downloaded zip file.
+Select the downloaded zip file and click on "OK" to close the preferences window.
 
 Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution Environment.
 
@@ -26,6 +27,7 @@ Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution
 
 ##Autocomplete support
 If your project Execution Environment is set correctly, you will get autocomplete support for NodeMCU specific functions.
+
 ![Autocomplete](/pics/autocomplete01.png?raw=true)
 
 ##Modules implemented
@@ -43,7 +45,16 @@ The following table describes the progress of integration of the NodeMCU modules
 | tmr          | partly       |
 | wifi         | partly       |
 
+You need a module that isn't already listet here?
+
+You need a function that isn't already documented?
+
+You found a mistake in documentation?
+
+Open an issue on github! Or fix it yourself and send a pull request!
+
 
 ##Links
 https://wiki.eclipse.org/LDT/User_Area/Tutorial/Create_a_simple_Execution_Environment
+
 https://wiki.eclipse.org/LDT/User_Area/Execution_Environment_file_format
