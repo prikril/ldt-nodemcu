@@ -1,0 +1,1372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+	</head>
+<body>
+<div id="container">
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div>
+<div id="main">
+	<div id="navigation">
+		<h2>Modules</h2>
+			<ul><li>
+				<a href="index.html">index</a>
+			</li></ul>
+		<ul>
+					<li><a href="bit32.html">bit32</a></li>
+					<li><a href="coroutine.html">coroutine</a></li>
+					<li><a href="debug.html">debug</a></li>
+					<li>global</li>
+					<li><a href="io.html">io</a></li>
+					<li><a href="math.html">math</a></li>
+					<li><a href="os.html">os</a></li>
+					<li><a href="package.html">package</a></li>
+					<li><a href="string.html">string</a></li>
+					<li><a href="table.html">table</a></li>
+		</ul>
+	</div>
+	<div id="content">
+   <h1>Module <code>global</code></h1>
+   
+<p>Lua global variables.</p>
+
+   
+<p>The basic library provides core functions to Lua. If you do not include this
+library in your application, you should check carefully whether you need to
+provide implementations for some of its facilities. </p>
+
+	<h2>Global(s)</h2>
+	<table class="function_list">
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#_G">_G</a></td>
+		<td class="summary">
+<p>A global variable (not a function) that holds the global environment
+(that is, <code>_G._G = _G</code>).</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#_VERSION">_VERSION</a></td>
+		<td class="summary">
+<p>A global variable (not a function) that holds a string containing the
+current interpreter version.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#assert">assert(v, message)</a></td>
+		<td class="summary">
+<p>Issues an error when the value of its argument <code>v</code> is false (i.e.,
+<strong>nil</strong> or <strong>false</strong>); otherwise, returns all its arguments.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#bit32">bit32</a></td>
+		<td class="summary">
+<p>This library provides generic functions for bitwise manipulation.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#collectgarbage">collectgarbage(opt, arg)</a></td>
+		<td class="summary">
+<p>This function is a generic interface to the garbage collector.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#coroutine">coroutine</a></td>
+		<td class="summary">
+<p>This library provides generic functions for coroutine manipulation.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#debug">debug</a></td>
+		<td class="summary">
+<p>The Debug Library.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#dofile">dofile(filename)</a></td>
+		<td class="summary">
+<p>Opens the named file and executes its contents as a Lua chunk.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#error">error(message, level)</a></td>
+		<td class="summary">
+<p>Terminates the last protected function called and returns <code>message</code>
+as the error message.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#getmetatable">getmetatable(object)</a></td>
+		<td class="summary">
+<p>If <code>object</code> does not have a metatable, returns <strong>nil</strong>.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#io">io</a></td>
+		<td class="summary">
+<p>The I/O library provides function for file manipulation.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#ipairs">ipairs(t)</a></td>
+		<td class="summary">
+<p>If t has a metamethod __ipairs, calls it with t as argument and returns the
+first three results from the call.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#load">load(ld, source, mode, env)</a></td>
+		<td class="summary">
+<p>Loads a chunk.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#loadfile">loadfile(filename, mode, env)</a></td>
+		<td class="summary">
+<p>Similar to <code>load</code>, but gets the chunk from file <code>filename</code> or from the
+standard input, if no file name is given.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#math">math</a></td>
+		<td class="summary">
+<p>This library is an interface to the standard C math library.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#next">next(table, index)</a></td>
+		<td class="summary">
+<p>Allows a program to traverse all fields of a table.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#os">os</a></td>
+		<td class="summary">
+<p>Operating System Facilities.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#package">package</a></td>
+		<td class="summary">
+<p>The package library provides basic facilities for loading and building modules in Lua.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#pairs">pairs(t)</a></td>
+		<td class="summary">
+<p>If t has a metamethod <code>__pairs</code>, calls it with t as argument and returns the
+first three results from the call.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#pcall">pcall(f, ...)</a></td>
+		<td class="summary">
+<p>Calls function <code>f</code> with the given arguments in <em>protected mode</em>.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#print">print(...)</a></td>
+		<td class="summary">
+<p>Receives any number of arguments and prints their values to <code>stdout</code>, using the
+<code>tostring</code> function to convert each argument to a string.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#rawequal">rawequal(v1, v2)</a></td>
+		<td class="summary">
+<p>Checks whether <code>v1</code> is equal to <code>v2</code>, without invoking any
+metamethod.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#rawget">rawget(table, index)</a></td>
+		<td class="summary">
+<p>Gets the real value of <code>table[index]</code>, without invoking any
+metamethod.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#rawlen">rawlen(v)</a></td>
+		<td class="summary">
+<p>Returns the length of the object <code>v</code>, which must be a table or a string, without
+invoking any metamethod.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#rawset">rawset(table, index, value)</a></td>
+		<td class="summary">
+<p>Sets the real value of <code>table[index]</code> to <code>value</code>, without invoking any
+metamethod.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#require">require(modname)</a></td>
+		<td class="summary">
+<p>Loads the given module.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#select">select(index, ...)</a></td>
+		<td class="summary">
+<p>If <code>index</code> is a number, returns all arguments after argument number
+<code>index</code>.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#setmetatable">setmetatable(table, metatable)</a></td>
+		<td class="summary">
+<p>Sets the metatable for the given table.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#string">string</a></td>
+		<td class="summary">
+<p>This library provides generic functions for string manipulation.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#table">table</a></td>
+		<td class="summary">
+<p>This library provides generic functions for table manipulation.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#tonumber">tonumber(e, base)</a></td>
+		<td class="summary">
+<p>When called with no base, tonumber tries to convert its argument to a number.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="#tostring">tostring(v)</a></td>
+		<td class="summary">
+<p>Receives an argument of any type and converts it to a string in a
+reasonable format.</p>
+</td>
+		</tr>
+	</table>
+	<h2>Global(s)</h2>
+		<dl class="function">
+<dt>
+		<em>#table</em>
+<a id="_G" >
+<strong>_G</strong>
+</a>
+</dt>
+<dd>
+	
+<p>A global variable (not a function) that holds the global environment
+(that is, <code>_G._G = _G</code>).</p>
+
+	
+<p>Lua itself does not use this variable; changing
+its value does not affect any environment, nor vice-versa.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em>#string</em>
+<a id="_VERSION" >
+<strong>_VERSION</strong>
+</a>
+</dt>
+<dd>
+	
+<p>A global variable (not a function) that holds a string containing the
+current interpreter version.</p>
+
+	
+<p>The current contents of this variable is
+"<code>Lua 5.2</code>".</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="assert" >
+<strong>assert(v, message)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Issues an error when the value of its argument <code>v</code> is false (i.e.,
+<strong>nil</strong> or <strong>false</strong>); otherwise, returns all its arguments.</p>
+
+	
+<p><code>message</code> is an error
+message; when absent, it defaults to <em>"assertion failed!"</em>.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em> v </em></code>: 
+if this argument is false an error is issued.</p>
+
+				</li>
+				<li>
+				
+<p><code><em>#string message </em></code>: 
+an error message (optional, <em>"assertion failed"</em> by default)</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+
+<p>All its arguments.</p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="bit32.html##(bit32)">bit32#bit32</a></em>
+<a id="bit32" >
+<strong>bit32</strong>
+</a>
+</dt>
+<dd>
+	
+<p>This library provides generic functions for bitwise manipulation.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="bit32.html">bit32</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="collectgarbage" >
+<strong>collectgarbage(opt, arg)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>This function is a generic interface to the garbage collector.</p>
+
+	
+<p>It performs
+different functions according to its first argument, <code>opt</code>:</p>
+
+<ul>
+    <li><p><em>"collect"</em>: performs a full garbage-collection cycle. This is the default option.</p></li>
+    <li><p><em>"stop"</em>: stops automatic execution of the garbage collector. The collector will
+    run only when explicitly invoked, until a call to restart it.</p></li>
+    <li><p><em>"restart"</em>: restarts automatic execution of the garbage collector.</p></li>
+    <li><p><em>"count"</em>: returns the total memory in use by Lua (in Kbytes) and a second 
+value with the total memory in bytes modulo <code>1024</code>. The first value has a fractional
+part, so the following equality is always true:
+(The second result is useful when Lua is compiled with a non floating-point type for numbers.)</p>
+
+<pre><code>k, b = collectgarbage("count")
+assert(k*1024 == math.floor(k)*1024 + b)
+</code></pre></li>
+    <li><p><em>"step"</em>: performs a garbage-collection step. The step "size" is controlled by
+    arg (larger values mean more steps) in a non-specified way. If you want to control
+    the step size you must experimentally tune the value of arg. Returns <strong>true</strong> if
+    the step finished a collection cycle.</p></li>
+    <li><p><em>"setpause"</em>: sets <code>arg</code> as the new value for the pause of the collector.
+    Returns the previous value for pause.</p></li>
+    <li><p><em>"setstepmul"</em>: sets <code>arg</code> as the new value for the step multiplier of the collector.
+    Returns the previous value for step.</p></li>
+    <li><p><em>"isrunning"</em>: returns a boolean that tells whether the collector is running
+    (i.e., not stopped).</p></li>
+    <li><p><em>"generational"</em>: changes the collector to generational mode. This is an experimental feature.</p></li>
+    <li><p><em>"incremental"</em>: changes the collector to incremental mode. This is the default mode.</p></li>
+</ul>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#string opt </em></code>: 
+the command to send (optional, "collect" by default)</p>
+
+				</li>
+				<li>
+				
+<p><code><em> arg </em></code>: 
+the argument of the command (optional).</p>
+
+
+				</li>
+		</ul>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="coroutine.html##(coroutine)">coroutine#coroutine</a></em>
+<a id="coroutine" >
+<strong>coroutine</strong>
+</a>
+</dt>
+<dd>
+	
+<p>This library provides generic functions for coroutine manipulation.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="coroutine.html">coroutine</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="debug.html##(debug)">debug#debug</a></em>
+<a id="debug" >
+<strong>debug</strong>
+</a>
+</dt>
+<dd>
+	
+<p>The Debug Library.</p>
+
+	
+<p>This is a  global variable which hold the preloaded <a href="debug.html">debug</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="dofile" >
+<strong>dofile(filename)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Opens the named file and executes its contents as a Lua chunk.</p>
+
+	
+<p>When
+called without arguments,
+<code>dofile</code> executes the contents of the standard input (<code>stdin</code>). Returns
+all values returned by the chunk. In case of errors, <code>dofile</code> propagates
+the error to its caller (that is, <code>dofile</code> does not run in protected mode).</p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#string filename </em></code>: 
+the path to the file. (optional)</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+
+<p>values returned by the chunk</p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="error" >
+<strong>error(message, level)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Terminates the last protected function called and returns <code>message</code>
+as the error message.</p>
+
+	
+<p>Function <code>error</code> never returns.</p>
+
+<p>Usually, <code>error</code> adds some information about the error position at the
+beginning of the message. The <code>level</code> argument specifies how to get the
+error position. <br/>
+With level 1 (the default), the error position is where the
+<code>error</code> function was called. <br/>
+Level 2 points the error to where the function
+that called <code>error</code> was called; and so on. <br/>
+Passing a level 0 avoids the addition of error position information to the message.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#string message </em></code>: 
+an error message.</p>
+
+				</li>
+				<li>
+				
+<p><code><em>#number level </em></code>: 
+specifies how to get the error position (optional, <code>1</code> by default).</p>
+
+
+				</li>
+		</ul>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="getmetatable" >
+<strong>getmetatable(object)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>If <code>object</code> does not have a metatable, returns <strong>nil</strong>.</p>
+
+	
+<p>Otherwise, if the
+object's metatable has a <code>"__metatable"</code> field, returns the associated
+value. Otherwise, returns the metatable of the given object.</p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em> object </em></code>: </p>
+
+				</li>
+		</ul>
+		<h3>Return values</h3>
+			<ol>
+				<li>
+				
+<p><em>#table:</em>
+the metatable of object.</p>
+
+				</li>
+				<li>
+				
+<p><em>#nil:</em>
+if no metatable was found</p>
+
+
+				</li>
+			</ol>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="io.html##(io)">io#io</a></em>
+<a id="io" >
+<strong>io</strong>
+</a>
+</dt>
+<dd>
+	
+<p>The I/O library provides function for file manipulation.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="io.html">io</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="ipairs" >
+<strong>ipairs(t)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>If t has a metamethod __ipairs, calls it with t as argument and returns the
+first three results from the call.</p>
+
+	
+<p>Otherwise, returns three values: an iterator function, the table <code>t</code>, and <code>0</code>,
+so that the construction</p>
+
+<pre><code> for i,v in ipairs(t) do body end
+</code></pre>
+
+<p>will iterate over the pairs <code>(1,t[1]), (2,t[2]), ...,</code> up to the first integer
+key absent from the table. </p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#table t </em></code>: 
+a table by index.</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+
+<p>iterator function, table <code>t</code>, the value <code>0</code></p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="load" >
+<strong>load(ld, source, mode, env)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Loads a chunk.</p>
+
+	
+<p>If <code>ld</code> is a string, the chunk is this string. If <code>ld</code> is a function, load calls
+it repeatedly to get the chunk pieces. Each call to <code>ld</code> must return a string
+that concatenates with previous results. A return of an empty string, <strong>nil</strong>, or
+no value signals the end of the chunk.</p>
+
+<p>If there are no syntactic errors, returns the compiled chunk as a function;
+otherwise, returns <strong>nil</strong> plus the error message.</p>
+
+<p>If the resulting function has upvalues, the first upvalue is set to the value
+of <code>env</code>, if that parameter is given, or to the value of the global environment.
+(When you load a main chunk, the resulting function will always have exactly one
+upvalue, the <code>_ENV</code> variable. When you load a binary chunk created from
+a function (see <code>string.dump</code>), the resulting function can have arbitrary upvalues.)</p>
+
+<p><code>source</code> is used as the source of the chunk for error messages and debug information.
+When absent, it defaults to <code>ld</code>, if <code>ld</code> is a string, or to <code>"=(load)"</code> otherwise.</p>
+
+<p>The string mode controls whether the chunk can be text or binary
+(that is, a precompiled chunk). It may be the string <code>"b"</code> (only binary chunks),
+<code>"t"</code> (only text chunks), or <code>"bt"</code> (both binary and text). The default is <code>"bt"</code>. </p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em> ld </em></code>: 
+string or function representing the chunk.</p>
+
+				</li>
+				<li>
+				
+<p><code><em>#string source </em></code>: 
+used as source code (optional, by default <code>ld</code> if <code>ld</code> is a
+string, or to <code>"=(load)"</code>otherwise.</p>
+
+				</li>
+				<li>
+				
+<p><code><em>#string mode </em></code>: 
+<code>"b"</code> for only binary chunk, <code>"t"</code> for only text chunks,
+<code>bt</code> for both binary and text (optional, "bt" by default).</p>
+
+				</li>
+				<li>
+				
+<p><code><em> env </em></code>: 
+environment where to set the first upvalue if any.</p>
+
+				</li>
+		</ul>
+		<h3>Return values</h3>
+			<ol>
+				<li>
+				
+
+<p>compiled chunk as a function</p>
+
+				</li>
+				<li>
+				
+<p><em>#nil, #string:</em>
+error message</p>
+
+
+				</li>
+			</ol>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="loadfile" >
+<strong>loadfile(filename, mode, env)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Similar to <code>load</code>, but gets the chunk from file <code>filename</code> or from the
+standard input, if no file name is given.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#string filename </em></code>: 
+the path to the file. (optional)</p>
+
+				</li>
+				<li>
+				
+<p><code><em>#string mode </em></code>: 
+<code>"b"</code> for only binary chunk, <code>"t"</code> for only text chunks,
+<code>bt</code> for both binary and text (optional, "bt" by default).</p>
+
+				</li>
+				<li>
+				
+<p><code><em> env </em></code>: 
+environment where to set the first upvalue if any.</p>
+
+				</li>
+		</ul>
+		<h3>Return values</h3>
+			<ol>
+				<li>
+				
+
+<p>compiled chunk as a function</p>
+
+				</li>
+				<li>
+				
+<p><em>#nil, #string:</em>
+error message</p>
+
+
+				</li>
+			</ol>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="math.html##(math)">math#math</a></em>
+<a id="math" >
+<strong>math</strong>
+</a>
+</dt>
+<dd>
+	
+<p>This library is an interface to the standard C math library.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="math.html">math</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="next" >
+<strong>next(table, index)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Allows a program to traverse all fields of a table.</p>
+
+	
+<p>Its first argument is
+a table and its second argument is an index in this table. <code>next</code> returns
+the next index of the table and its associated value.</p>
+
+<p>When called with <strong>nil</strong>
+as its second argument, <code>next</code> returns an initial index and its associated
+value. When called with the last index, or with nil in an empty table, <code>next</code>
+returns nil.</p>
+
+<p>If the second argument is absent, then it is interpreted as
+nil. In particular, you can use <code>next(t)</code> to check whether a table is empty.
+The order in which the indices are enumerated is not specified, <em>even for
+numeric indices</em>. (To traverse a table in numeric order, use a numerical <strong>for</strong>.)</p>
+
+<p>The behavior of <code>next</code> is undefined if, during the traversal, you assign
+any value to a non-existent field in the table. You may however modify
+existing fields. In particular, you may clear existing fields.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#table table </em></code>: 
+table to traverse.</p>
+
+				</li>
+				<li>
+				
+<p><code><em> index </em></code>: 
+initial index (optional).</p>
+
+				</li>
+		</ul>
+		<h3>Return values</h3>
+			<ol>
+				<li>
+				
+
+<p>index, value</p>
+
+				</li>
+				<li>
+				
+<p><em>#nil:</em>
+if called on the last index or on an empty table</p>
+
+
+				</li>
+			</ol>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="os.html##(os)">os#os</a></em>
+<a id="os" >
+<strong>os</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Operating System Facilities.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="os.html">os</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="package.html##(package)">package#package</a></em>
+<a id="package" >
+<strong>package</strong>
+</a>
+</dt>
+<dd>
+	
+<p>The package library provides basic facilities for loading and building modules in Lua.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="package.html">package</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="pairs" >
+<strong>pairs(t)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>If t has a metamethod <code>__pairs</code>, calls it with t as argument and returns the
+first three results from the call.</p>
+
+	
+
+<p>Otherwise, returns three values: the <code>next</code> function, the table t, and nil,
+so that the construction</p>
+
+<pre><code> for k,v in pairs(t) do body end
+</code></pre>
+
+<p>will iterate over all key–value pairs of table <code>t</code>.
+See function next for the caveats of modifying the table during its traversal. </p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#table t </em></code>: 
+table to traverse.</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+
+<p>iterator function, table <code>t</code>, the value <code>0</code></p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="pcall" >
+<strong>pcall(f, ...)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Calls function <code>f</code> with the given arguments in <em>protected mode</em>.</p>
+
+	
+<p>This
+means that any error inside <code>f</code> is not propagated; instead, <code>pcall</code> catches
+the error and returns a status code. Its first result is the status code (a
+boolean), which is true if the call succeeds without errors. In such case,
+<code>pcall</code> also returns all results from the call, after this first result. In
+case of any error, <code>pcall</code> returns <strong>false</strong> plus the error message.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em> f </em></code>: 
+function to be call in <em>protected mode</em>.</p>
+
+				</li>
+				<li>
+				
+<p><code><em> ... </em></code>: 
+function arguments.</p>
+
+				</li>
+		</ul>
+		<h3>Return values</h3>
+			<ol>
+				<li>
+				
+<p><em>#boolean:</em>
+true plus the result of <code>f</code> function if its call succeeds without errors.</p>
+
+				</li>
+				<li>
+				
+<p><em>#boolean, #string:</em>
+false plus the error message in case of any error.</p>
+
+
+				</li>
+			</ol>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="print" >
+<strong>print(...)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Receives any number of arguments and prints their values to <code>stdout</code>, using the
+<code>tostring</code> function to convert each argument to a string.</p>
+
+	
+<p>print is not intended
+for formatted output, but only as a quick way to show a value, for instance for
+debugging. For complete control over the output, use <code>string.format</code> and <code>io.write</code>. </p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em> ... </em></code>: 
+values to print to <code>stdout</code>.</p>
+
+
+				</li>
+		</ul>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="rawequal" >
+<strong>rawequal(v1, v2)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Checks whether <code>v1</code> is equal to <code>v2</code>, without invoking any
+metamethod.</p>
+
+	
+<p>Returns a boolean.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em> v1 </em></code>: 
+first operand</p>
+
+				</li>
+				<li>
+				
+<p><code><em> v2 </em></code>: 
+second operand</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+<p><em>#boolean:</em>
+true if <code>v1</code> is equal to <code>v2</code>. </p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="rawget" >
+<strong>rawget(table, index)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Gets the real value of <code>table[index]</code>, without invoking any
+metamethod.</p>
+
+	
+<p><code>table</code> must be a table; <code>index</code> may be any value.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#table table </em></code>: 
+table to looking for</p>
+
+				</li>
+				<li>
+				
+<p><code><em> index </em></code>: 
+index in the table</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+
+<p>The real value of <code>table[index]</code>, without invoking any
+metamethod.</p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="rawlen" >
+<strong>rawlen(v)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Returns the length of the object <code>v</code>, which must be a table or a string, without
+invoking any metamethod.</p>
+
+	
+<p>Returns an integer number. </p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em> v </em></code>: 
+table or a string</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+<p><em>#number:</em>
+length of <code>v</code></p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="rawset" >
+<strong>rawset(table, index, value)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Sets the real value of <code>table[index]</code> to <code>value</code>, without invoking any
+metamethod.</p>
+
+	
+<p><code>table</code> must be a table, <code>index</code> any value different from nil,
+and <code>value</code> any Lua value. <br/>
+This function returns <code>table</code>.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#table table </em></code>: </p>
+
+				</li>
+				<li>
+				
+<p><code><em> index </em></code>: 
+any value different from nil.</p>
+
+				</li>
+				<li>
+				
+<p><code><em> value </em></code>: 
+any Lua value.</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+<p><em>#table:</em>
+the given table</p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="require" >
+<strong>require(modname)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Loads the given module.</p>
+
+	
+<p>The function starts by looking into the <code>package.loaded</code> table to 
+determine whether modname is already loaded. If it is, then require returns the value stored 
+at <code>package.loaded[modname]</code>. Otherwise, it tries to find a loader for the module.</p>
+
+<p>To find a loader, require is guided by the <code>package.searchers</code> sequence. By changing this sequence,
+we can change how require looks for a module. The following explanation is based on the default
+configuration for <code>package.searchers</code>.</p>
+
+<p>First require queries <code>package.preload[modname]</code>. If it has a value, this value (which should be a function)
+is the loader. Otherwise require searches for a Lua loader using the path stored in <code>package.path</code>.
+If that also fails, it searches for a C loader using the path stored in <code>package.cpath</code>. If that also
+fails, it tries an all-in-one loader (see <code>package.searchers</code>).</p>
+
+<p>Once a loader is found, require calls the loader with two arguments: modname and an extra value dependent
+on how it got the loader. (If the loader came from a file, this extra value is the file name.) If the loader
+returns any non-nil value, require assigns the returned value to package.loaded[modname]. If the loader
+does not return a non-nil value and has not assigned any value to package.loaded[modname], then require
+assigns <code>true</code> to this entry. In any case, require returns the final value of package.loaded[modname].</p>
+
+<p>If there is any error loading or running the module, or if it cannot find any loader for the module,
+then require raises an error. </p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#string modname </em></code>: 
+name of module to load.</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+
+<p>loaded module</p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="select" >
+<strong>select(index, ...)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>If <code>index</code> is a number, returns all arguments after argument number
+<code>index</code>.</p>
+
+	
+<p>Otherwise, <code>index</code> must be the string <code>"#"</code>, and <code>select</code> returns
+the total number of extra arguments it received.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em> index </em></code>: 
+a number or the string <code>"#"</code></p>
+
+				</li>
+				<li>
+				
+<p><code><em> ... </em></code>: </p>
+
+				</li>
+		</ul>
+		<h3>Return values</h3>
+			<ol>
+				<li>
+				
+
+<p>all arguments after argument number <code>index</code></p>
+
+				</li>
+				<li>
+				
+
+<p>total number of extra arguments</p>
+
+
+				</li>
+			</ol>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="setmetatable" >
+<strong>setmetatable(table, metatable)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Sets the metatable for the given table.</p>
+
+	
+<p>(You cannot change the metatable
+of other types from Lua, only from C.) If <code>metatable</code> is nil, removes the
+metatable of the given table. If the original metatable has a <code>"__metatable"</code>
+field, raises an error. <br/>
+This function returns <code>table</code>.</p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em>#table table </em></code>: </p>
+
+				</li>
+				<li>
+				
+<p><code><em>#table metatable </em></code>: </p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+<p><em>#table:</em>
+The first argument <code>table</code>.</p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="string.html##(string)">string#string</a></em>
+<a id="string" >
+<strong>string</strong>
+</a>
+</dt>
+<dd>
+	
+<p>This library provides generic functions for string manipulation.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="string.html">string</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+		<em><a href="table.html##(table)">table#table</a></em>
+<a id="table" >
+<strong>table</strong>
+</a>
+</dt>
+<dd>
+	
+<p>This library provides generic functions for table manipulation.</p>
+
+	
+<p>This is a global variable which hold the preloaded <a href="table.html">table</a> module.</p>
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="tonumber" >
+<strong>tonumber(e, base)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>When called with no base, tonumber tries to convert its argument to a number.</p>
+
+	
+<p>If the argument is already a number or a string convertible to a number,
+then tonumber returns this number; otherwise, it returns <strong>nil</strong>.</p>
+
+<p>When called with base, then e should be a string to be interpreted as an
+integer numeral in that base. The base may be any integer between <code>2</code> and <code>36</code>,
+inclusive. In bases above <code>10</code>, the letter 'A' (in either upper or lower case)
+represents <code>10</code>, 'B' represents <code>11</code>, and so forth, with 'Z' representing <code>35</code>.
+If the string <code>e</code> is not a valid numeral in the given base,
+the function returns <strong>nil</strong>. </p>
+
+		<h3>Parameters</h3>
+		<ul>
+				<li>
+				
+<p><code><em> e </em></code>: 
+a number or string to convert to a number.</p>
+
+				</li>
+				<li>
+				
+<p><code><em>#number base </em></code>: 
+the base to interpret the numeral, any integer between <code>2</code> and <code>36</code> (optional, <code>10</code> by default).</p>
+
+				</li>
+		</ul>
+		<h3>Return values</h3>
+			<ol>
+				<li>
+				
+<p><em>#number:</em>
+converted number</p>
+
+				</li>
+				<li>
+				
+<p><em>#nil:</em>
+if convertion fail.</p>
+
+
+				</li>
+			</ol>
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="tostring" >
+<strong>tostring(v)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Receives an argument of any type and converts it to a string in a
+reasonable format.</p>
+
+	
+<p>(For complete control of how numbers are converted, use
+<code>string.format</code>.)</p>
+
+<p>If the metatable of <code>v</code> has a <code>"__tostring"</code> field, then <code>tostring</code> calls
+the corresponding value with <code>v</code> as argument, and uses the result of the
+call as its result.</p>
+
+		<h3>Parameter</h3>
+		<ul>
+				<li>
+				
+<p><code><em> v </em></code>: 
+an argument of any type.</p>
+
+				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+<p><em>#string:</em>
+a string in a reasonable format.</p>
+
+
+</dd>
+</dl>
+</div>
+
+</div>
+</body>
+</html>

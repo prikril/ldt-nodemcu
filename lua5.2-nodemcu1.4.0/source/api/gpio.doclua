@@ -1,0 +1,58 @@
+-------------------------------------------------------------------------------
+-- GPIO Functions.
+-- @module gpio
+
+
+-------------------------------------------------------------------------------
+-- Initialize pin to GPIO mode, set the pin in/out direction, and optional internal weak pull-up.
+-- Syntax: gpio.mode(pin, mode [, pullup])
+-- @function [parent=#gpio] mode
+-- @param #number pin pin to configure, IO index
+-- @param #number mode one of gpio.OUTPUT, gpio.OPENDRAIN, gpio.INPUT, or gpio.INT (interrupt mode)
+-- @param #number pullup OPTIONAL: gpio.PULLUP enables the weak pull-up resistor; default is gpio.FLOAT
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Read digital GPIO pin value.
+-- @function [parent=#gpio] read
+-- @param #number pin pin to read, IO index
+-- @return #number a number, 0 = low, 1 = high
+
+-------------------------------------------------------------------------------
+-- Set digital GPIO pin value.
+-- @function [parent=#gpio] write
+-- @param #number pin pin to write, IO index
+-- @param #number level gpio.HIGH or gpio.LOW
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- gpio mode: INPUT.
+-- Returns 0
+-- @field [parent=#gpio] #number INPUT
+
+-------------------------------------------------------------------------------
+-- gpio mode: OUTPUT.
+-- Returns 1
+-- @field [parent=#gpio] #number OUTPUT
+
+-------------------------------------------------------------------------------
+-- gpio state: LOW.
+-- Returns 0
+-- @field [parent=#gpio] #number LOW
+
+-------------------------------------------------------------------------------
+-- gpio state: HIGH.
+-- Returns 1
+-- @field [parent=#gpio] #number HIGH
+
+-------------------------------------------------------------------------------
+-- gpio pullup: FLOAT.
+-- Returns 0
+-- @field [parent=#gpio] #number FLOAT
+
+-------------------------------------------------------------------------------
+-- gpio pullup: PULLUP.
+-- Returns 1
+-- @field [parent=#gpio] #number PULLUP
+
+return nil
