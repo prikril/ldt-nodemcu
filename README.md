@@ -8,8 +8,10 @@ LDT can be a downloaded as a standalone IDE or as a part of Eclipse IDE.
 
 More Infos at: https://eclipse.org/ldt/
 
+The documentation is taken from http://nodemcu.readthedocs.io/en/dev/en/ and https://github.com/nodemcu/nodemcu-firmware (source files).
+
 ##Installation
-Download the zip files in the "release" directory of your desired NodeMCU Version of this repository.
+Download the zip file in the "release" directory of your desired NodeMCU Version of this repository.
 
 Open LDT and goto Preferences. On the left side choose "Lua".
 
@@ -21,6 +23,11 @@ Select the downloaded zip file.
 Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution Environment.
 
 ![Create Project](/pics/create-proj01.png?raw=true)
+
+##Autocomplete support
+If your project Execution Environment is set correct, you will get autocomplete support for NodeMCU specific functions.
+![Autocomplete](/pics/autocomplete01.png?raw=true)
+
 
 ##Links
 https://wiki.eclipse.org/LDT/User_Area/Tutorial/Create_a_simple_Execution_Environment
