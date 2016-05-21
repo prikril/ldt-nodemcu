@@ -1,5 +1,8 @@
 -------------------------------------------------------------------------------
 -- Timer Functions.
+-- The tmr module allows access to simple timers, the system counter and uptime.
+-- NodeMCU provides 7 timers, numbered 0-6.
+-- It is currently up to the user to keep track of which timers are used for what.
 -- @module tmr
 
 

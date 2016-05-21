@@ -47,18 +47,38 @@
 
 ------------------------------------------------------------------------------
 -- The Debug Library.
--- This is a  global variable which hold the preloaded @{debug} module.
+-- This is a global variable which hold the preloaded @{debug} module.
 -- @field[parent = #global] debug#debug debug preloaded module
 
 ------------------------------------------------------------------------------
+-- The File NodeMCU Library.
+-- This is a global variable which hold the preloaded @{file} module.
+-- @field[parent = #global] file#file file preloaded module
+
+------------------------------------------------------------------------------
 -- The GPIO NodeMCU Library.
--- This is a  global variable which hold the preloaded @{gpio} module.
+-- This is a global variable which hold the preloaded @{gpio} module.
 -- @field[parent = #global] gpio#gpio gpio preloaded module
 
 ------------------------------------------------------------------------------
+-- The Net NodeMCU Library.
+-- This is a global variable which hold the preloaded @{net} module.
+-- @field[parent = #global] net#net net preloaded module
+
+------------------------------------------------------------------------------
+-- The Node NodeMCU Library.
+-- This is a global variable which hold the preloaded @{node} module.
+-- @field[parent = #global] node#node node preloaded module
+
+------------------------------------------------------------------------------
 -- The Timer NodeMCU Library.
--- This is a  global variable which hold the preloaded @{tmr} module.
+-- This is a global variable which hold the preloaded @{tmr} module.
 -- @field[parent = #global] tmr#tmr tmr preloaded module
+
+------------------------------------------------------------------------------
+-- The WiFi NodeMCU Library.
+-- This is a global variable which hold the preloaded @{wifi} module.
+-- @field[parent = #global] wifi#wifi wifi preloaded module
 
 -------------------------------------------------------------------------------
 -- Issues an error when the value of its argument `v` is false (i.e.,

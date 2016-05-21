@@ -1,5 +1,7 @@
 -------------------------------------------------------------------------------
 -- GPIO Functions.
+-- This module provides access to the GPIO (General Purpose Input/Output) subsystem.
+-- All access is based on the I/O index number on the NodeMCU dev kits, not the internal GPIO pin.
 -- @module gpio
 
 

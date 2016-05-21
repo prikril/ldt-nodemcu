@@ -1,0 +1,140 @@
+-------------------------------------------------------------------------------
+-- wifi module.
+-- The NodeMCU WiFi control is spread across several tables:
+-- wifi for overall WiFi configuration
+-- wifi.sta for station mode functions
+-- wifi.ap for wireless access point (WAP or simply AP) functions
+-- wifi.ap.dhcp for DHCP server control
+-- wifi.eventmon for wifi event monitor
+-- @module wifi
+
+
+-------------------------------------------------------------------------------
+-- wifi mode: STATION.
+-- for when the device is connected to a WiFi router. This is often done to give the device access to the Internet.
+-- Returns 1
+-- @field [parent=#wifi] #number STATION
+
+-------------------------------------------------------------------------------
+-- wifi mode: SOFTAP.
+-- for when the device is acting only as an access point.
+-- This will allow you to see the device in the list of WiFi networks (unless you hide the SSID, of course).
+-- In this mode your computer can connect to the device, creating a local area network.
+-- Unless you change the value, the NodeMCU device will be given a local IP address of 192.168.4.1 and assign your computer the next available IP address, such as 192.168.4.2 .
+-- Returns 2
+-- @field [parent=#wifi] #number SOFTAP
+
+-------------------------------------------------------------------------------
+-- wifi mode: STATIONAP.
+-- is the combination of wifi.STATION and wifi.SOFTAP.
+-- It allows you to create a local WiFi connection and connect to another WiFi router.
+-- Returns 3
+-- @field [parent=#wifi] #number STATIONAP
+
+-------------------------------------------------------------------------------
+-- wifi mode: NULLMODE.
+-- to switch off WiFi.
+-- Returns 0
+-- @field [parent=#wifi] #number NULLMODE
+
+
+-------------------------------------------------------------------------------
+-- Gets the current WiFi channel.
+-- @function [parent=#wifi] getchannel
+-- @return #number current WiFi channel
+
+-------------------------------------------------------------------------------
+-- Gets WiFi operation mode.
+-- @function [parent=#wifi] getmode
+-- @return #number The WiFi mode, as one of the wifi.STATION, wifi.SOFTAP, wifi.STATIONAP or wifi.NULLMODE constants.
+
+-------------------------------------------------------------------------------
+-- Configures the WiFi mode to use.
+-- @function [parent=#wifi] setmode
+-- @param #number mode value should be one of the wifi.STATION, wifi.SOFTAP, wifi.STATIONAP or wifi.NULLMODE constants.
+-- @return #number current mode after setup
+
+
+-------------------------------------------------------------------------------
+-- The station mode type
+-- @type station
+
+-------------------------------------------------------------------------------
+-- Station mode functions
+-- @field [parent=#wifi] #station sta
+
+-------------------------------------------------------------------------------
+-- Sets the WiFi station configuration.
+-- NOTE: Station configuration will be retained until changed even if device is turned off. 
+-- Syntax: wifi.sta.config(ssid, password[, auto[, bssid]])
+-- @function [parent=#station] config
+-- @param #string ssid string which is less than 32 bytes.
+-- @param #string password string which is 8-64 or 0 bytes. Empty string indicates an open WiFi access point.
+-- @param #number auto OPTIONAL: autoconnect - defaults to 1
+-- @param #string bssid OPTIONAL: string that contains the MAC address of the access point
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Connects to the configured AP in station mode.
+-- You only ever need to call this if auto-connect was disabled in wifi.sta.config().
+-- @function [parent=#station] connect
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Disconnects from AP in station mode.
+-- @function [parent=#station] disconnect
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Gets IP address, netmask and gateway address in station mode.
+-- @function [parent=#station] getip
+-- @return #string ip, #string netmask, #string gateway address
+-- @return #nil Returns nil if IP = "0.0.0.0".
+
+-------------------------------------------------------------------------------
+-- Gets MAC address in station mode.
+-- @function [parent=#station] getmac
+-- @return #string MAC address as string e.g. "18-33-44-FE-55-BB"
+
+-------------------------------------------------------------------------------
+-- Sets IP address, netmask, gateway address in station mode.
+-- @function [parent=#station] setip
+-- @param #table cfg table contain IP address, netmask, and gateway
+-- @return #boolean true if success, false otherwise
+
+
+-------------------------------------------------------------------------------
+-- The ap mode type
+-- @type accesspoint
+
+-------------------------------------------------------------------------------
+-- AP mode functions
+-- @field [parent=#wifi] #accesspoint ap
+
+-------------------------------------------------------------------------------
+-- Sets SSID and password in AP mode. Be sure to make the password at least 8 characters long!
+-- If you don't it will default to no password and not set the SSID!
+-- It will still work as an access point but use a default SSID like e.g. NODE-9997C3.
+-- NOTE: SoftAP Configuration will be retained until changed even if device is turned off.
+-- @function [parent=#accesspoint] config
+-- @param #table cfg table with ssid, pwd, auth, channel, hidden, max, beacon
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Gets IP address, netmask and gateway address in AP mode.
+-- @function [parent=#accesspoint] getip
+-- @return #string ip, #string netmask, #string gateway address
+-- @return #nil Returns nil if IP = "0.0.0.0".
+
+-------------------------------------------------------------------------------
+-- Gets MAC address in AP mode.
+-- @function [parent=#accesspoint] getmac
+-- @return #string MAC address as string, for example "1A-33-44-FE-55-BB"
+
+-------------------------------------------------------------------------------
+-- Sets IP address, netmask and gateway address in AP mode.
+-- @function [parent=#accesspoint] setip
+-- @param #table cfg table contain IP address, netmask, and gateway
+-- @return #boolean true if successful, false otherwise
+
+return nil

@@ -1,0 +1,83 @@
+-------------------------------------------------------------------------------
+-- net module.
+-- @module net
+
+--- A socket
+-- @type socket
+
+-------------------------------------------------------------------------------
+-- Closes socket.
+-- @function [parent=#socket] close
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Connect to a remote server.
+-- @function [parent=#socket] connect
+-- @param self
+-- @param #number port port number
+-- @param #string ip IP address or domain name string
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Register callback functions for specific events.
+-- @function [parent=#socket] on
+-- @param self
+-- @param #string event string, which can be "connection", "reconnection", "disconnection", "receive" or "sent"
+-- @param function function(#socket[, string]) callback function. The first parameter is the socket. If event is "receive", the second parameter is the received data as string.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sends data to remote peer.
+-- Syntax: send(string[, function(sent)])
+-- @function [parent=#socket] send
+-- @param self
+-- @param #string event string, which can be "connection", "reconnection", "disconnection", "receive" or "sent"
+-- @param function OPTIONAL: function(sent) callback function for sending string
+-- @return #nil
+
+--- A server
+-- @type server
+
+-------------------------------------------------------------------------------
+-- Closes the server.
+-- @function [parent=#server] close
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Listen on port from IP address.
+-- Syntax: net.server.listen(port,[ip],function(net.socket))
+-- @function [parent=#server] listen
+-- @param self
+-- @param ip OPTIONAL: IP address string, can be omitted
+-- @param #number port port number
+-- @param function function(#socket) callback function, pass to caller function as param if a connection is created successfully
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- Creates a client.
+-- @function [parent=#net] createConnection
+-- @param #number type net.TCP or net.UDP
+-- @param #number secure 1 for encrypted, 0 for plain
+-- @return #socket net.socket sub module
+
+-------------------------------------------------------------------------------
+-- Creates a server.
+-- @function [parent=#net] createServer
+-- @param #number type net.TCP or net.UDP
+-- @param #number timeout for a TCP server timeout is 1~28'800 seconds (for an inactive client to be disconnected)
+-- @return #server net.server sub module
+
+-------------------------------------------------------------------------------
+-- net type: TCP.
+-- Returns 0x10
+-- @field [parent=#net] #number TCP
+
+-------------------------------------------------------------------------------
+-- net type: UDP.
+-- Returns 0x20
+-- @field [parent=#net] #number UDP
+
+return nil

@@ -25,8 +25,23 @@ Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution
 ![Create Project](/pics/create-proj01.png?raw=true)
 
 ##Autocomplete support
-If your project Execution Environment is set correct, you will get autocomplete support for NodeMCU specific functions.
+If your project Execution Environment is set correctly, you will get autocomplete support for NodeMCU specific functions.
 ![Autocomplete](/pics/autocomplete01.png?raw=true)
+
+##Modules implemented
+The following table describes the progress of integration of the NodeMCU modules.
+
+| Module       | Integration  |
+| ------------ |:------------:|
+| dht          | no           |
+| file         | partly       |
+| gpio         | partly       |
+| i2c          | no           |
+| mqtt         | no           |
+| net          | partly       |
+| node         | partly       |
+| tmr          | partly       |
+| wifi         | partly       |
 
 
 ##Links
