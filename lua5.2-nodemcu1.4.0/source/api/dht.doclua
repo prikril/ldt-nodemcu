@@ -1,0 +1,42 @@
+-------------------------------------------------------------------------------
+-- DHT Functions.
+-- If using float firmware then temp and humi are floating point numbers.
+-- On an integer firmware, the final values have to be concatenated from temp and temp\_dec / humi and humi\_dec.
+-- @module dht
+
+
+-------------------------------------------------------------------------------
+-- dht status: OK.
+-- Returns 0
+-- @field [parent=#dht] #number OK
+
+-------------------------------------------------------------------------------
+-- dht status: ERROR_CHECKSUM.
+-- Returns -1
+-- @field [parent=#dht] #number ERROR_CHECKSUM
+
+-------------------------------------------------------------------------------
+-- dht status: ERROR_TIMEOUT.
+-- Returns -2
+-- @field [parent=#dht] #number ERROR_TIMEOUT
+
+
+-------------------------------------------------------------------------------
+-- Read all kinds of DHT sensors, including DHT11, 21, 22, 33, 44 humidity temperature combo sensor.
+-- @function [parent=#dht] read
+-- @param #number pin pin number of DHT sensor (can't be 0), type is number
+-- @return #number, #number, #number, #number, #number status, temp, humi, temp\_dec, humi\_dec
+
+-------------------------------------------------------------------------------
+-- Read DHT11 humidity temperature combo sensor.
+-- @function [parent=#dht] read11
+-- @param #number pin pin number of DHT11 sensor (can't be 0), type is number
+-- @return #number, #number, #number, #number, #number status, temp, humi, temp\_dec, humi\_dec
+
+-------------------------------------------------------------------------------
+-- Read all kinds of DHT sensors, except DHT11.
+-- @function [parent=#dht] readxx
+-- @param #number pin pin number of DHT sensor (can't be 0), type is number
+-- @return #number, #number, #number, #number, #number status, temp, humi, temp\_dec, humi\_dec
+
+return nil

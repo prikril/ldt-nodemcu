@@ -6,6 +6,36 @@
 
 
 -------------------------------------------------------------------------------
+-- gpio mode: INPUT.
+-- Returns 0
+-- @field [parent=#gpio] #number INPUT
+
+-------------------------------------------------------------------------------
+-- gpio mode: OUTPUT.
+-- Returns 1
+-- @field [parent=#gpio] #number OUTPUT
+
+-------------------------------------------------------------------------------
+-- gpio level: LOW.
+-- Returns 0
+-- @field [parent=#gpio] #number LOW
+
+-------------------------------------------------------------------------------
+-- gpio level: HIGH.
+-- Returns 1
+-- @field [parent=#gpio] #number HIGH
+
+-------------------------------------------------------------------------------
+-- gpio pullup: FLOAT.
+-- Returns 0
+-- @field [parent=#gpio] #number FLOAT
+
+-------------------------------------------------------------------------------
+-- gpio pullup: PULLUP.
+-- Returns 1
+-- @field [parent=#gpio] #number PULLUP
+
+-------------------------------------------------------------------------------
 -- Initialize pin to GPIO mode, set the pin in/out direction, and optional internal weak pull-up.
 -- Syntax: gpio.mode(pin, mode [, pullup])
 -- @function [parent=#gpio] mode
@@ -26,35 +56,5 @@
 -- @param #number pin pin to write, IO index
 -- @param #number level gpio.HIGH or gpio.LOW
 -- @return #nil
-
--------------------------------------------------------------------------------
--- gpio mode: INPUT.
--- Returns 0
--- @field [parent=#gpio] #number INPUT
-
--------------------------------------------------------------------------------
--- gpio mode: OUTPUT.
--- Returns 1
--- @field [parent=#gpio] #number OUTPUT
-
--------------------------------------------------------------------------------
--- gpio state: LOW.
--- Returns 0
--- @field [parent=#gpio] #number LOW
-
--------------------------------------------------------------------------------
--- gpio state: HIGH.
--- Returns 1
--- @field [parent=#gpio] #number HIGH
-
--------------------------------------------------------------------------------
--- gpio pullup: FLOAT.
--- Returns 0
--- @field [parent=#gpio] #number FLOAT
-
--------------------------------------------------------------------------------
--- gpio pullup: PULLUP.
--- Returns 1
--- @field [parent=#gpio] #number PULLUP
 
 return nil

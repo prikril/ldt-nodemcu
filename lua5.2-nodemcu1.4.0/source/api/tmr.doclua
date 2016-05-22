@@ -7,14 +7,29 @@
 
 
 -------------------------------------------------------------------------------
+-- Timer mode: ALARM_AUTO automatically repeating alarm.
+-- Returns 1
+-- @field [parent=#tmr] #number ALARM_AUTO
+
+-------------------------------------------------------------------------------
+-- Timer mode: ALARM_SINGLE a one-shot alarm (and no need to call tmr.unregister()).
+-- Returns 0
+-- @field [parent=#tmr] #number ALARM_SINGLE
+
+-------------------------------------------------------------------------------
+-- Timer mode: ALARM_SEMI manually repeating alarm (call tmr.start() to restart).
+-- Returns 2
+-- @field [parent=#tmr] #number ALARM_SEMI
+
+-------------------------------------------------------------------------------
 -- This is a convenience function combining tmr.register() and tmr.start() into a single call.
 -- To free up the resources with this timer when done using it, call tmr.unregister() on it.
 -- @function [parent=#tmr] alarm
 -- @param #number id timer id (0-6)
 -- @param #number interval_ms timer interval in milliseconds. Maximum value is 6870947
 -- @param #number mode timer mode (ALARAM_SINGLE, ALARM_SEMI, ALARM_AUTO)
--- @param function
--- @return Returns true if the timer was started, false on error.
+-- @param #function function
+-- @return #boolean Returns true if the timer was started, false on error.
 
 -------------------------------------------------------------------------------
 -- Busyloops the processor for a specified number of microseconds.
@@ -50,7 +65,7 @@
 -- @param #number id timer id (0-6)
 -- @param #number interval_ms timer interval in milliseconds. Maximum value is 6870947
 -- @param #number mode timer mode (ALARAM_SINGLE, ALARM_SEMI, ALARM_AUTO)
--- @param function
+-- @param #function function
 -- @return #nil
 
 -------------------------------------------------------------------------------
@@ -59,20 +74,5 @@
 -- @function [parent=#tmr] unregister
 -- @param #number id timer id (0-6)
 -- @return #nil
-
--------------------------------------------------------------------------------
--- Timer mode: ALARM_AUTO automatically repeating alarm.
--- Returns 1
--- @field [parent=#tmr] #number ALARM_AUTO
-
--------------------------------------------------------------------------------
--- Timer mode: ALARM_SINGLE a one-shot alarm (and no need to call tmr.unregister()).
--- Returns 0
--- @field [parent=#tmr] #number ALARM_SINGLE
-
--------------------------------------------------------------------------------
--- Timer mode: ALARM_SEMI manually repeating alarm (call tmr.start() to restart).
--- Returns 2
--- @field [parent=#tmr] #number ALARM_SEMI
 
 return nil

@@ -36,7 +36,7 @@ The following table describes the progress of integration of the NodeMCU modules
 
 | Module       | Integration  |
 | ------------ |:------------:|
-| dht          | no           |
+| dht          | full         |
 | file         | partly       |
 | gpio         | partly       |
 | i2c          | no           |
