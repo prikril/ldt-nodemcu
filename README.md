@@ -8,12 +8,13 @@ LDT can be a downloaded as a standalone IDE or as a part of Eclipse IDE.
 
 More Infos at: https://eclipse.org/ldt/
 
-The documentation is taken from http://nodemcu.readthedocs.io/en/dev/en/ and https://github.com/nodemcu/nodemcu-firmware (source files).
+The documentation is inherited from http://nodemcu.readthedocs.io/en/dev/en/ and https://github.com/nodemcu/nodemcu-firmware (source files).
+Some parts have been removed or edited.
 
 ##Installation
 Download the zip file in the "release" directory of your desired NodeMCU Version of this repository.
 
-Open LDT and goto Preferences. On the left side choose "Lua".
+Open LDT (or Eclipse) and go to Preferences. On the left side choose "Lua".
 
 Click on "Execution Environment" and then the "Add..." button.
 
@@ -51,7 +52,7 @@ You need a function that isn't already documented?
 
 You found a mistake in documentation?
 
-Open an issue on github! Or fix it yourself and send a pull request!
+**Open an issue on github! Or fix it yourself and send a pull request!**
 
 
 ##Links
