@@ -17,7 +17,6 @@
 				<a href="index.html">index</a>
 			</li></ul>
 		<ul>
-					<li><a href="bit32.html">bit32</a></li>
 					<li><a href="coroutine.html">coroutine</a></li>
 					<li><a href="debug.html">debug</a></li>
 					<li><a href="global.html">global</a></li>
@@ -36,7 +35,7 @@
 
    
 <p>This library is an interface to the standard C math library.
-It provides all its functions inside the table <code>math</code>.</p>
+It provides all its functions inside the table math.</p>
 
 	<h2><a id="#(math)" >Type <code>math</code></a></h2>
 		<table class="function_list">
@@ -135,9 +134,15 @@ numerical value.</p>
 </td>
 		</tr>
 		<tr>
-		<td class="name" nowrap="nowrap"><a href="##(math).log">math.log(x, base)</a></td>
+		<td class="name" nowrap="nowrap"><a href="##(math).log">math.log(x)</a></td>
 		<td class="summary">
-<p>Returns the logarithm of <code>x</code> in the given base.</p>
+<p>Returns the natural logarithm of <code>x</code>.</p>
+</td>
+		</tr>
+		<tr>
+		<td class="name" nowrap="nowrap"><a href="##(math).log10">math.log10(x)</a></td>
+		<td class="summary">
+<p>Returns the base-10 logarithm of <code>x</code>.</p>
 </td>
 		</tr>
 		<tr>
@@ -614,27 +619,43 @@ numerical value.</p>
 		<dl class="function">
 <dt>
 <a id="#(math).log" >
-<strong>math.log(x, base)</strong>
+<strong>math.log(x)</strong>
 </a>
 </dt>
 <dd>
 	
-<p>Returns the logarithm of <code>x</code> in the given base.</p>
+<p>Returns the natural logarithm of <code>x</code>.</p>
 
-	
-<p>The default for <code>base</code> is <code>e</code> 
-(so that the function returns the natural logarithm of <code>x</code>). </p>
-
-		<h3>Parameters</h3>
+		<h3>Parameter</h3>
 		<ul>
 				<li>
 				
 <p><code><em>#number x </em></code>: </p>
 
 				</li>
+		</ul>
+		<h3>Return value</h3>
+				
+<p><em>#number:</em></p>
+
+
+</dd>
+</dl>
+		<dl class="function">
+<dt>
+<a id="#(math).log10" >
+<strong>math.log10(x)</strong>
+</a>
+</dt>
+<dd>
+	
+<p>Returns the base-10 logarithm of <code>x</code>.</p>
+
+		<h3>Parameter</h3>
+		<ul>
 				<li>
 				
-<p><code><em>#number base </em></code>: </p>
+<p><code><em>#number x </em></code>: </p>
 
 				</li>
 		</ul>
@@ -659,8 +680,7 @@ numerical value.</p>
 		<ul>
 				<li>
 				
-<p><code><em>#number x </em></code>: 
-first number</p>
+<p><code><em>#number x </em></code>: </p>
 
 				</li>
 		</ul>
@@ -685,8 +705,7 @@ first number</p>
 		<ul>
 				<li>
 				
-<p><code><em>#number x </em></code>: 
-first number</p>
+<p><code><em>#number x </em></code>: </p>
 
 				</li>
 		</ul>
