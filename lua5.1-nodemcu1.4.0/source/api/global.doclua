@@ -30,16 +30,6 @@
 -- @field[parent = #global] math#math math preloaded module
 
 ------------------------------------------------------------------------------
--- The I/O library provides function for file manipulation.
--- This is a global variable which hold the preloaded @{io} module.
--- @field[parent = #global] io#io io preloaded module
-
-------------------------------------------------------------------------------
--- Operating System Facilities.
--- This is a global variable which hold the preloaded @{os} module.
--- @field[parent = #global] os#os os preloaded module
-
-------------------------------------------------------------------------------
 -- The Debug Library.
 -- This is a global variable which hold the preloaded @{debug} module.
 -- @field[parent = #global] debug#debug debug preloaded module

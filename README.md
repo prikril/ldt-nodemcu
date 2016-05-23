@@ -18,18 +18,27 @@ Open LDT (or Eclipse) and go to Preferences. On the left side choose "Lua".
 
 Click on "Execution Environment" and then the "Add..." button.
 
-![Add zip](/pics/add-ee01.png?raw=true)
+![Add zip](/pics/add-ee-compact01.png?raw=true)
 
-Select the downloaded zip file and click on "OK" to close the preferences window.
+Select the downloaded zip file. Then you should see it in the list of the Execution Environments.
+
+If you want, you can tick the Lua NodeMCU Execution Environment to make it the default one.
+
+Click on "OK" to close the preferences window.
 
 Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution Environment.
 
 ![Create Project](/pics/create-proj01.png?raw=true)
 
 ##Autocomplete support
-If your project Execution Environment is set correctly, you will get autocomplete support for NodeMCU specific functions.
+If your project's Execution Environment is set correctly, you will get autocomplete support for NodeMCU specific functions.
 
 ![Autocomplete](/pics/autocomplete01.png?raw=true)
+
+Note: The default Lua modules "io" and "os" are not available in NodeMCU(http://nodemcu.readthedocs.io/en/dev/en/lua-developer-faq/#how-is-nodemcu-lua-different-to-standard-lua).
+I made a screenshot from ESPlorer to show which default Lua modules are available. (The romtable addresses may differ in your firmware.)
+
+![Default Lua modules in NodeMCU](/pics/nodemcu-default-lua-modules01.png?raw=true)
 
 ##Modules implemented
 The following table describes the progress of integration of the NodeMCU modules.
