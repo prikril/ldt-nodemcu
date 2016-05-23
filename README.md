@@ -35,7 +35,7 @@ If your project's Execution Environment is set correctly, you will get autocompl
 
 ![Autocomplete](/pics/autocomplete01.png?raw=true)
 
-Note: The default Lua modules "io" and "os" are not available in NodeMCU(http://nodemcu.readthedocs.io/en/dev/en/lua-developer-faq/#how-is-nodemcu-lua-different-to-standard-lua).
+Note: The default Lua modules "io" and "os" are not available in NodeMCU (http://nodemcu.readthedocs.io/en/dev/en/lua-developer-faq/#how-is-nodemcu-lua-different-to-standard-lua).
 I made a screenshot from ESPlorer to show which default Lua modules are available. (The romtable addresses may differ in your firmware.)
 
 ![Default Lua modules in NodeMCU](/pics/nodemcu-default-lua-modules01.png?raw=true)
@@ -48,7 +48,7 @@ The following table describes the progress of integration of the NodeMCU modules
 | dht          | full         |
 | file         | partly       |
 | gpio         | partly       |
-| i2c          | no           |
+| i2c          | full         |
 | mqtt         | no           |
 | net          | partly       |
 | node         | partly       |
