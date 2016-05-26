@@ -43,7 +43,7 @@ I made a screenshot from ESPlorer to show which default Lua modules are availabl
 
 ![Default Lua modules in NodeMCU](/pics/nodemcu-default-lua-modules01.png?raw=true)
 
-##Modules implemented
+##Modules integrated
 The following table shows the progress of integration of the NodeMCU modules for LDT.
 In addition you see which modules are availabe in the specific NodeMCU versions.
 
@@ -63,7 +63,7 @@ You will always get displayed all modules for autocompletion that are in the Exe
 | net          | partly       | yes           | yes           |
 | node         | partly       | yes           | yes           |
 | ow           | no           | yes           | yes           |
-| tmr          | partly       | yes           | yes           |
+| tmr          | full         | yes           | yes           |
 | wifi         | partly       | yes           | yes           |
 
 * You need a module that isn't already listed here?
