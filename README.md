@@ -11,7 +11,7 @@ More Infos at: https://eclipse.org/ldt/
 The documentation is inherited from http://nodemcu.readthedocs.io/en/dev/en/ and https://github.com/nodemcu/nodemcu-firmware (source files).
 Some parts have been removed or edited.
 
-NodeMCU is a eLua based fimrware for ESP8266 chips to run Lua programs.
+NodeMCU is a eLua based firmware for ESP8266 chips to run Lua programs.
 You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use other methods https://nodemcu.readthedocs.io/en/dev/en/build/).
 
 ##Installation
@@ -56,7 +56,7 @@ You will always get displayed all modules for autocompletion that are in the Exe
 | bit          | full         | yes           | yes           |
 | dht          | full         | yes           | yes           |
 | file         | partly       | yes           | yes           |
-| gpio         | partly       | yes           | yes           |
+| gpio         | full         | yes           | yes           |
 | http         | no           | no            | yes           |
 | i2c          | full         | yes           | yes           |
 | mqtt         | no           | yes           | yes           |

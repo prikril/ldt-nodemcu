@@ -51,6 +51,27 @@
 -- @return #number a number, 0 = low, 1 = high
 
 -------------------------------------------------------------------------------
+-- Serialize output based on a sequence of delay-times.
+-- After each delay, the pin is toggled.
+-- Syntax: gpio.serout(pin, start\_level, delay\_times [, repeat\_num])
+-- @function [parent=#gpio] serout
+-- @param #number pin pin to use, IO index
+-- @param #number start_level level to start on, either gpio.HIGH or gpio.LOW
+-- @param #table delay_times an array of delay times between each toggle of the gpio pin.
+-- @param #number repeat_num an OPTIONAL number of times to run through the sequence.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Establish or clear a callback function to run on interrupt for a pin.
+-- This function is not available if GPIO\_INTERRUPT\_ENABLE was undefined at compile time.
+-- Syntax: gpio.trig(pin, [type [, callback_function]])
+-- @function [parent=#gpio] trig
+-- @param #number pin 1-12, pin to trigger on, IO index. Note that pin 0 does not support interrupts.
+-- @param #string type "up", "down", "both", "low", "high", which represent rising edge, falling edge, both edges, low level, and high level trigger modes respectivey. If the type is "none" or omitted then the callback function is removed and the interrupt is disabled.
+-- @param #function callback_function(level) callback function when trigger occurs. The level of the specified pin at the interrupt passed as the parameter to the callback. The previous callback function will be used if the function is omitted.
+-- @return #nil
+
+-------------------------------------------------------------------------------
 -- Set digital GPIO pin value.
 -- @function [parent=#gpio] write
 -- @param #number pin pin to write, IO index
