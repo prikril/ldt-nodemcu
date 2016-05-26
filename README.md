@@ -2,7 +2,7 @@
 
 This project integrates NodeMCU support in Lua Development Tools (LDT) as a new Execution Environment.
 
-No debugging support! Only autocomplete!
+**No debugging support! Only autocompletion!**
 
 LDT can be a downloaded as a standalone IDE or as a part of Eclipse IDE.
 
@@ -10,6 +10,9 @@ More Infos at: https://eclipse.org/ldt/
 
 The documentation is inherited from http://nodemcu.readthedocs.io/en/dev/en/ and https://github.com/nodemcu/nodemcu-firmware (source files).
 Some parts have been removed or edited.
+
+NodeMCU is a eLua based fimrware for ESP8266 chips to run Lua programs.
+You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use other methods https://nodemcu.readthedocs.io/en/dev/en/build/).
 
 ##Installation
 Download the zip file in the "release" directory of your desired NodeMCU Version of this repository.
@@ -30,8 +33,8 @@ Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution
 
 ![Create Project](/pics/create-proj01.png?raw=true)
 
-##Autocomplete support
-If your project's Execution Environment is set correctly, you will get autocomplete support for NodeMCU specific functions.
+##Autocompletion support
+If your project's Execution Environment is set correctly, you will get autocompletion support for NodeMCU specific functions.
 
 ![Autocomplete](/pics/autocomplete01.png?raw=true)
 
@@ -41,25 +44,33 @@ I made a screenshot from ESPlorer to show which default Lua modules are availabl
 ![Default Lua modules in NodeMCU](/pics/nodemcu-default-lua-modules01.png?raw=true)
 
 ##Modules implemented
-The following table describes the progress of integration of the NodeMCU modules.
+The following table shows the progress of integration of the NodeMCU modules for LDT.
+In addition you see which modules are availabe in the specific NodeMCU versions.
 
-| Module       | Integration  |
-| ------------ |:------------:|
-| dht          | full         |
-| file         | partly       |
-| gpio         | partly       |
-| i2c          | full         |
-| mqtt         | no           |
-| net          | partly       |
-| node         | partly       |
-| tmr          | partly       |
-| wifi         | partly       |
+Note: The IDE doesn't know which modules are included in your custom NodeMCU firmware.
+You will always get displayed all modules for autocompletion that are in the Execution Environment Zip!
 
-You need a module that isn't already listet here?
+| Module       | Integration  | NodeMCU 1.4.0 | NodeMCU 1.5.1 |
+| ------------ |:------------:|:-------------:|:-------------:|
+| am2320       | no           | no            | yes           |
+| bit          | full         | yes           | yes           |
+| dht          | full         | yes           | yes           |
+| file         | partly       | yes           | yes           |
+| gpio         | partly       | yes           | yes           |
+| http         | no           | no            | yes           |
+| i2c          | full         | yes           | yes           |
+| mqtt         | no           | yes           | yes           |
+| net          | partly       | yes           | yes           |
+| node         | partly       | yes           | yes           |
+| ow           | no           | yes           | yes           |
+| tmr          | partly       | yes           | yes           |
+| wifi         | partly       | yes           | yes           |
 
-You need a function that isn't already documented?
+* You need a module that isn't already listed here?
 
-You found a mistake in documentation?
+* You need a function that isn't already integrated?
+
+* You found a mistake in this project?
 
 **Open an issue on github! Or fix it yourself and send a pull request!**
 

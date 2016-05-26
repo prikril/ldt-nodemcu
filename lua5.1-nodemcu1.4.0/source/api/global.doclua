@@ -36,6 +36,11 @@
 
 ------------------------------------------------------------------------------
 -- The File NodeMCU Library.
+-- This is a global variable which hold the preloaded @{bit} module.
+-- @field[parent = #global] bit#bit bit preloaded module
+
+------------------------------------------------------------------------------
+-- The File NodeMCU Library.
 -- This is a global variable which hold the preloaded @{dht} module.
 -- @field[parent = #global] dht#dht dht preloaded module
 
