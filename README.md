@@ -40,6 +40,7 @@ If your project's Execution Environment is set correctly, you will get autocompl
 
 Note: The default Lua modules "io" and "os" are not available in NodeMCU (http://nodemcu.readthedocs.io/en/dev/en/lua-developer-faq/#how-is-nodemcu-lua-different-to-standard-lua).
 I made a screenshot from ESPlorer to show which default Lua modules are available. (The romtable addresses may differ in your firmware.)
+Not all functions from "math" are available! Consider https://github.com/nodemcu/nodemcu-firmware/blob/master/app/lua/lmathlib.c to see which functions can be used.
 
 ![Default Lua modules in NodeMCU](/pics/nodemcu-default-lua-modules01.png?raw=true)
 
@@ -49,22 +50,23 @@ In addition you see which modules are availabe in the specific NodeMCU versions.
 
 Note: The IDE doesn't know which modules are included in your custom NodeMCU firmware.
 You will always get displayed all modules for autocompletion that are in the Execution Environment Zip!
+Some modules include functions that are not available in 1.4.0 but 1.5.1 (e.g. `wifi.sta.getrssi()`).
 
-| Module       | Integration  | NodeMCU 1.4.0 | NodeMCU 1.5.1 |
-| ------------ |:------------:|:-------------:|:-------------:|
-| am2320       | no           | no            | yes           |
-| bit          | full         | yes           | yes           |
-| dht          | full         | yes           | yes           |
-| file         | partly       | yes           | yes           |
-| gpio         | full         | yes           | yes           |
-| http         | no           | no            | yes           |
-| i2c          | full         | yes           | yes           |
-| mqtt         | no           | yes           | yes           |
-| net          | partly       | yes           | yes           |
-| node         | partly       | yes           | yes           |
-| ow           | no           | yes           | yes           |
-| tmr          | full         | yes           | yes           |
-| wifi         | partly       | yes           | yes           |
+| Module       | Integration  | NodeMCU 1.4.0 | NodeMCU 1.5.1 | Comment                                |
+| ------------ |:------------:|:-------------:|:-------------:| -------------------------------------- |
+| am2320       | no           | no            | yes           |                                        |
+| bit          | full         | yes           | yes           |                                        |
+| dht          | full         | yes           | yes           |                                        |
+| file         | partly       | yes           | yes           |                                        |
+| gpio         | full         | yes           | yes           |                                        |
+| http         | no           | no            | yes           |                                        |
+| i2c          | full         | yes           | yes           |                                        |
+| mqtt         | no           | yes           | yes           |                                        |
+| net          | partly       | yes           | yes           |                                        |
+| node         | partly       | yes           | yes           |                                        |
+| ow           | no           | yes           | yes           |                                        |
+| tmr          | full         | yes           | yes           |                                        |
+| wifi         | full\*       | yes           | yes           | \*full, except: eventmon, sleep, smart |
 
 * You need a module that isn't already listed here?
 

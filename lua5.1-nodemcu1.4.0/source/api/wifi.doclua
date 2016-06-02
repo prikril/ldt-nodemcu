@@ -37,6 +37,74 @@
 -- Returns 0
 -- @field [parent=#wifi] #number NULLMODE
 
+-------------------------------------------------------------------------------
+-- wifi pyhsical mode: PHYMODE_B.
+-- 802.11b, more range, low Transfer rate, more current draw.
+-- Returns 1
+-- @field [parent=#wifi] #number PHYMODE_B
+
+-------------------------------------------------------------------------------
+-- wifi pyhsical mode: PHYMODE_G.
+-- 802.11g, medium range, medium transfer rate, medium current draw.
+-- Returns 2
+-- @field [parent=#wifi] #number PHYMODE_G
+
+-------------------------------------------------------------------------------
+-- wifi pyhsical mode: PHYMODE_N.
+-- 802.11n, least range, fast transfer rate, least current draw (STATION ONLY).
+-- Returns 3
+-- @field [parent=#wifi] #number PHYMODE_N
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_IDLE.
+-- Returns 0
+-- @field [parent=#wifi] #number STA_IDLE
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_CONNECTING.
+-- Returns 1
+-- @field [parent=#wifi] #number STA_CONNECTING
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_WRONGPWD.
+-- Returns 2
+-- @field [parent=#wifi] #number STA_WRONGPWD
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_APNOTFOUND.
+-- Returns 3
+-- @field [parent=#wifi] #number STA_APNOTFOUND
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_FAIL.
+-- Returns 4
+-- @field [parent=#wifi] #number STA_FAIL
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_GOTIP.
+-- Returns 5
+-- @field [parent=#wifi] #number STA_GOTIP
+
+-------------------------------------------------------------------------------
+-- wifi authentication: OPEN.
+-- Returns 0
+-- @field [parent=#wifi] #number OPEN
+
+-------------------------------------------------------------------------------
+-- wifi authentication: WPA_PSK.
+-- Returns 2
+-- @field [parent=#wifi] #number WPA_PSK
+
+-------------------------------------------------------------------------------
+-- wifi authentication: WPA2_PSK.
+-- Returns 3
+-- @field [parent=#wifi] #number WPA2_PSK
+
+-------------------------------------------------------------------------------
+-- wifi authentication: WPA\_WPA2\_PSK.
+-- Returns 4
+-- @field [parent=#wifi] #number WPA_WPA2_PSK
+
 
 -------------------------------------------------------------------------------
 -- Gets the current WiFi channel.
@@ -49,10 +117,21 @@
 -- @return #number The WiFi mode, as one of the wifi.STATION, wifi.SOFTAP, wifi.STATIONAP or wifi.NULLMODE constants.
 
 -------------------------------------------------------------------------------
+-- Gets WiFi physical mode.
+-- @function [parent=#wifi] getphymode
+-- @return #number The current physical mode as one of wifi.PHYMODE\_B, wifi.PHYMODE\_G or wifi.PHYMODE\_N.
+
+-------------------------------------------------------------------------------
 -- Configures the WiFi mode to use.
 -- @function [parent=#wifi] setmode
 -- @param #number mode value should be one of the wifi.STATION, wifi.SOFTAP, wifi.STATIONAP or wifi.NULLMODE constants.
 -- @return #number current mode after setup
+
+-------------------------------------------------------------------------------
+-- Sets WiFi physical mode.
+-- @function [parent=#wifi] setphymode
+-- @param #number mode one of the following wifi.PHYMODE\_B, wifi.PHYMODE\_G or wifi.PHYMODE\_N constants.
+-- @return #number physical mode after setup
 
 
 -------------------------------------------------------------------------------
@@ -62,6 +141,12 @@
 -------------------------------------------------------------------------------
 -- Station mode functions
 -- @field [parent=#wifi] #station sta
+
+-------------------------------------------------------------------------------
+-- Auto connects to AP in station mode.
+-- @function [parent=#station] autoconnect
+-- @param #number auto 0 to disable auto connecting, 1 to enable auto connecting
+-- @return #nil
 
 -------------------------------------------------------------------------------
 -- Sets the WiFi station configuration.
@@ -86,9 +171,14 @@
 -- @return #nil
 
 -------------------------------------------------------------------------------
+-- Gets the WiFi station configuration.
+-- @function [parent=#station] getconfig
+-- @return #string, #string, #string, #string ssid, password, bssid\_set, bssid Note: If bssid\_set is equal to 0 then bssid is irrelevant
+
+-------------------------------------------------------------------------------
 -- Gets IP address, netmask and gateway address in station mode.
 -- @function [parent=#station] getip
--- @return #string ip, #string netmask, #string gateway address
+-- @return #string, #string, #string ip, netmask, gateway address
 -- @return #nil Returns nil if IP = "0.0.0.0".
 
 -------------------------------------------------------------------------------
@@ -101,6 +191,17 @@
 -- @function [parent=#station] setip
 -- @param #table cfg table contain IP address, netmask, and gateway
 -- @return #boolean true if success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Sets MAC address in station mode.
+-- @function [parent=#station] setmac
+-- @param #string mac MAC address in string e.g. "DE:AD:BE:EF:7A:C0"
+-- @return #boolean true if success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Gets the current status in station mode.
+-- @function [parent=#station] status
+-- @return #number wifi station status 0~5 as defined in constants
 
 
 -------------------------------------------------------------------------------
@@ -117,13 +218,24 @@
 -- It will still work as an access point but use a default SSID like e.g. NODE-9997C3.
 -- NOTE: SoftAP Configuration will be retained until changed even if device is turned off.
 -- @function [parent=#accesspoint] config
--- @param #table cfg table with ssid, pwd, auth, channel, hidden, max, beacon
+-- @param #table cfg table with ssid, pwd, auth (wifi auth constant), channel (1-14 default 6), hidden (0 or 1 default 0), max (connections 1-4 default 4), beacon (interval 10-60000 default 100)
 -- @return #nil
+
+-------------------------------------------------------------------------------
+-- Gets broadcast address in AP mode.
+-- @function [parent=#accesspoint] getbroadcast
+-- @return #string broadcast address in string, for example "192.168.0.255"
+-- @return #nil returns nil if IP address = "0.0.0.0"
+
+-------------------------------------------------------------------------------
+-- Gets table of clients connected to device in AP mode.
+-- @function [parent=#accesspoint] getclient
+-- @return #table table of connected clients (mac, ip)
 
 -------------------------------------------------------------------------------
 -- Gets IP address, netmask and gateway address in AP mode.
 -- @function [parent=#accesspoint] getip
--- @return #string ip, #string netmask, #string gateway address
+-- @return #string, #string, #string ip, netmask, gateway address
 -- @return #nil Returns nil if IP = "0.0.0.0".
 
 -------------------------------------------------------------------------------
@@ -136,5 +248,37 @@
 -- @function [parent=#accesspoint] setip
 -- @param #table cfg table contain IP address, netmask, and gateway
 -- @return #boolean true if successful, false otherwise
+
+-------------------------------------------------------------------------------
+-- Sets MAC address in AP mode.
+-- @function [parent=#accesspoint] setmac
+-- @param #string mac MAC address in byte string, for example "AC-1D-1C-B1-0B-22"
+-- @return #boolean true if successful, false otherwise
+
+
+-------------------------------------------------------------------------------
+-- The ap dhcp mode type
+-- @type apdhcp
+
+-------------------------------------------------------------------------------
+-- AP mode dhcp functions
+-- @field [parent=#accesspoint] #apdhcp dhcp
+
+-------------------------------------------------------------------------------
+-- Configure the dhcp service.
+-- Currently only supports setting the start address of the dhcp address pool.
+-- @function [parent=#apdhcp] config
+-- @param #table dhcp_config table containing the start-IP of the DHCP address pool, eg. "192.168.1.100"
+-- @return #number, #number pool\_startip, pool\_endip
+
+-------------------------------------------------------------------------------
+-- Starts the DHCP service.
+-- @function [parent=#apdhcp] start
+-- @return #boolean boolean indicating success
+
+-------------------------------------------------------------------------------
+-- Stops the DHCP service.
+-- @function [parent=#apdhcp] stop
+-- @return #boolean boolean indicating success
 
 return nil
