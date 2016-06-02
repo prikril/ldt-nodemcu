@@ -1,0 +1,94 @@
+-------------------------------------------------------------------------------
+-- bit module.
+-- Bit manipulation support, on 32bit integers.
+-- @module bit
+
+
+-------------------------------------------------------------------------------
+-- Arithmetic right shift a number equivalent to value >> shift in C.
+-- @function [parent=#bit] arshift
+-- @param #number value the value to shift
+-- @param #number shift positions to shift
+-- @return #number the number shifted right (arithmetically)
+
+-------------------------------------------------------------------------------
+-- Bitwise AND, equivalent to val1 & val2 & ... & valn in C.
+-- Syntax: bit.band(val1, val2 [, ... valn])
+-- @function [parent=#bit] band
+-- @param #number val1 first AND argument
+-- @param #number val2 second AND argument
+-- @return #number the bitwise AND of all the arguments (number)
+
+-------------------------------------------------------------------------------
+-- Generate a number with a 1 bit (used for mask generation). Equivalent to 1 << position in C.
+-- @function [parent=#bit] bit
+-- @param #number position position of the bit that will be set to 1
+-- @return #number a number with only one 1 bit at position (the rest are set to 0)
+
+-------------------------------------------------------------------------------
+-- Bitwise negation, equivalent to `~value in C.
+-- @function [parent=#bit] bnot
+-- @param #number value the number to negate
+-- @return #number the bitwise negated value of the number
+
+-------------------------------------------------------------------------------
+-- Bitwise OR, equivalent to val1 | val2 | ... | valn in C.
+-- Syntax: bit.bor(val1, val2 [, ... valn])
+-- @function [parent=#bit] bor
+-- @param #number val1 first OR argument
+-- @param #number val2 second OR argument
+-- @return #number the bitwise OR of all the arguments (number)
+
+-------------------------------------------------------------------------------
+-- Bitwise XOR, equivalent to val1 ^ val2 ^ ... ^ valn in C.
+-- Syntax: bit.bxor(val1, val2 [, ... valn])
+-- @function [parent=#bit] bxor
+-- @param #number val1 first XOR argument
+-- @param #number val2 second XOR argument
+-- @return #number the bitwise XOR of all the arguments (number)
+
+-------------------------------------------------------------------------------
+-- Clear bits in a number.
+-- Syntax: bit.clear(value, pos1 [, ... posn])
+-- @function [parent=#bit] clear
+-- @param #number value the base number
+-- @param #number pos1 position of the first bit to clear
+-- @return #number the number with the bit(s) cleared in the given position(s)
+
+-------------------------------------------------------------------------------
+-- Test if a given bit is cleared.
+-- @function [parent=#bit] isclear
+-- @param #number value the value to test
+-- @param #number position bit position to test
+-- @return #boolean true if the bit at the given position is 0, false otherwise
+
+-------------------------------------------------------------------------------
+-- Test if a given bit is set.
+-- @function [parent=#bit] isset
+-- @param #number value the value to test
+-- @param #number position bit position to test
+-- @return #boolean true if the bit at the given position is 1, false otherwise
+
+-------------------------------------------------------------------------------
+-- Left-shift a number, equivalent to value << shift in C.
+-- @function [parent=#bit] lshift
+-- @param #number value the value to shift
+-- @param #number shift positions to shift
+-- @return #number the number shifted left
+
+-------------------------------------------------------------------------------
+-- Logical right shift a number, equivalent to ( unsigned )value >> shift in C.
+-- @function [parent=#bit] rshift
+-- @param #number value the value to shift
+-- @param #number shift positions to shift
+-- @return #number the number shifted right (logically)
+
+-------------------------------------------------------------------------------
+-- Set bits in a number.
+-- Syntax: bit.set(value, pos1 [, ... posn ])
+-- @function [parent=#bit] set
+-- @param #number value the base number.
+-- @param #number pos1 position of the first bit to set.
+-- @return #number the number with the bit(s) set in the given position(s)
+
+return nil

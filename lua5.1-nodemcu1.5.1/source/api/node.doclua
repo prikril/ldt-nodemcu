@@ -1,0 +1,23 @@
+-------------------------------------------------------------------------------
+-- node module.
+-- The node module provides access to system-level features such as sleep, restart and various info and IDs.
+-- @module node
+
+
+-------------------------------------------------------------------------------
+-- Compiles a Lua text file into Lua bytecode, and saves it as .lc file.
+-- @function [parent=#node] compile
+-- @param #string filename name of Lua text file
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Restarts the chip.
+-- @function [parent=#node] restart
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Restores system configuration to defaults using the SDK function system_restore(), which doesn't document precisely what it erases/restores.
+-- @function [parent=#node] restore
+-- @return #nil
+
+return nil

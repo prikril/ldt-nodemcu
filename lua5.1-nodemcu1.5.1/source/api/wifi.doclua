@@ -1,0 +1,308 @@
+-------------------------------------------------------------------------------
+-- wifi module.
+-- The NodeMCU WiFi control is spread across several tables:
+-- wifi for overall WiFi configuration
+-- wifi.sta for station mode functions
+-- wifi.ap for wireless access point (WAP or simply AP) functions
+-- wifi.ap.dhcp for DHCP server control
+-- wifi.eventmon for wifi event monitor
+-- @module wifi
+
+
+-------------------------------------------------------------------------------
+-- wifi mode: STATION.
+-- for when the device is connected to a WiFi router. This is often done to give the device access to the Internet.
+-- Returns 1
+-- @field [parent=#wifi] #number STATION
+
+-------------------------------------------------------------------------------
+-- wifi mode: SOFTAP.
+-- for when the device is acting only as an access point.
+-- This will allow you to see the device in the list of WiFi networks (unless you hide the SSID, of course).
+-- In this mode your computer can connect to the device, creating a local area network.
+-- Unless you change the value, the NodeMCU device will be given a local IP address of 192.168.4.1 and assign your computer the next available IP address, such as 192.168.4.2 .
+-- Returns 2
+-- @field [parent=#wifi] #number SOFTAP
+
+-------------------------------------------------------------------------------
+-- wifi mode: STATIONAP.
+-- is the combination of wifi.STATION and wifi.SOFTAP.
+-- It allows you to create a local WiFi connection and connect to another WiFi router.
+-- Returns 3
+-- @field [parent=#wifi] #number STATIONAP
+
+-------------------------------------------------------------------------------
+-- wifi mode: NULLMODE.
+-- to switch off WiFi.
+-- Returns 0
+-- @field [parent=#wifi] #number NULLMODE
+
+-------------------------------------------------------------------------------
+-- wifi pyhsical mode: PHYMODE_B.
+-- 802.11b, more range, low Transfer rate, more current draw.
+-- Returns 1
+-- @field [parent=#wifi] #number PHYMODE_B
+
+-------------------------------------------------------------------------------
+-- wifi pyhsical mode: PHYMODE_G.
+-- 802.11g, medium range, medium transfer rate, medium current draw.
+-- Returns 2
+-- @field [parent=#wifi] #number PHYMODE_G
+
+-------------------------------------------------------------------------------
+-- wifi pyhsical mode: PHYMODE_N.
+-- 802.11n, least range, fast transfer rate, least current draw (STATION ONLY).
+-- Returns 3
+-- @field [parent=#wifi] #number PHYMODE_N
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_IDLE.
+-- Returns 0
+-- @field [parent=#wifi] #number STA_IDLE
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_CONNECTING.
+-- Returns 1
+-- @field [parent=#wifi] #number STA_CONNECTING
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_WRONGPWD.
+-- Returns 2
+-- @field [parent=#wifi] #number STA_WRONGPWD
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_APNOTFOUND.
+-- Returns 3
+-- @field [parent=#wifi] #number STA_APNOTFOUND
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_FAIL.
+-- Returns 4
+-- @field [parent=#wifi] #number STA_FAIL
+
+-------------------------------------------------------------------------------
+-- wifi station status: STA_GOTIP.
+-- Returns 5
+-- @field [parent=#wifi] #number STA_GOTIP
+
+-------------------------------------------------------------------------------
+-- wifi authentication: OPEN.
+-- Returns 0
+-- @field [parent=#wifi] #number OPEN
+
+-------------------------------------------------------------------------------
+-- wifi authentication: WPA_PSK.
+-- Returns 2
+-- @field [parent=#wifi] #number WPA_PSK
+
+-------------------------------------------------------------------------------
+-- wifi authentication: WPA2_PSK.
+-- Returns 3
+-- @field [parent=#wifi] #number WPA2_PSK
+
+-------------------------------------------------------------------------------
+-- wifi authentication: WPA\_WPA2\_PSK.
+-- Returns 4
+-- @field [parent=#wifi] #number WPA_WPA2_PSK
+
+
+-------------------------------------------------------------------------------
+-- Gets the current WiFi channel.
+-- @function [parent=#wifi] getchannel
+-- @return #number current WiFi channel
+
+-------------------------------------------------------------------------------
+-- Gets WiFi operation mode.
+-- @function [parent=#wifi] getmode
+-- @return #number The WiFi mode, as one of the wifi.STATION, wifi.SOFTAP, wifi.STATIONAP or wifi.NULLMODE constants.
+
+-------------------------------------------------------------------------------
+-- Gets WiFi physical mode.
+-- @function [parent=#wifi] getphymode
+-- @return #number The current physical mode as one of wifi.PHYMODE\_B, wifi.PHYMODE\_G or wifi.PHYMODE\_N.
+
+-------------------------------------------------------------------------------
+-- Configures the WiFi mode to use.
+-- @function [parent=#wifi] setmode
+-- @param #number mode value should be one of the wifi.STATION, wifi.SOFTAP, wifi.STATIONAP or wifi.NULLMODE constants.
+-- @return #number current mode after setup
+
+-------------------------------------------------------------------------------
+-- Sets WiFi physical mode.
+-- @function [parent=#wifi] setphymode
+-- @param #number mode one of the following wifi.PHYMODE\_B, wifi.PHYMODE\_G or wifi.PHYMODE\_N constants.
+-- @return #number physical mode after setup
+
+
+-------------------------------------------------------------------------------
+-- The station mode type
+-- @type station
+
+-------------------------------------------------------------------------------
+-- Station mode functions
+-- @field [parent=#wifi] #station sta
+
+-------------------------------------------------------------------------------
+-- Auto connects to AP in station mode.
+-- @function [parent=#station] autoconnect
+-- @param #number auto 0 to disable auto connecting, 1 to enable auto connecting
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sets the WiFi station configuration.
+-- NOTE: Station configuration will be retained until changed even if device is turned off. 
+-- Syntax: wifi.sta.config(ssid, password[, auto[, bssid]])
+-- @function [parent=#station] config
+-- @param #string ssid string which is less than 32 bytes.
+-- @param #string password string which is 8-64 or 0 bytes. Empty string indicates an open WiFi access point.
+-- @param #number auto OPTIONAL: autoconnect - defaults to 1
+-- @param #string bssid OPTIONAL: string that contains the MAC address of the access point
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Connects to the configured AP in station mode.
+-- You only ever need to call this if auto-connect was disabled in wifi.sta.config().
+-- @function [parent=#station] connect
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Disconnects from AP in station mode.
+-- @function [parent=#station] disconnect
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Gets the WiFi station configuration.
+-- @function [parent=#station] getconfig
+-- @return #string, #string, #string, #string ssid, password, bssid\_set, bssid Note: If bssid\_set is equal to 0 then bssid is irrelevant
+
+-------------------------------------------------------------------------------
+-- Gets current station hostname.
+-- @function [parent=#station] gethostname
+-- @return #string currently configured hostname
+
+-------------------------------------------------------------------------------
+-- Gets IP address, netmask and gateway address in station mode.
+-- @function [parent=#station] getip
+-- @return #string, #string, #string ip, netmask, gateway address
+-- @return #nil Returns nil if IP = "0.0.0.0".
+
+-------------------------------------------------------------------------------
+-- Gets MAC address in station mode.
+-- @function [parent=#station] getmac
+-- @return #string MAC address as string e.g. "18-33-44-FE-55-BB"
+
+-------------------------------------------------------------------------------
+-- Get RSSI(Received Signal Strength Indicator) of the Access Point which ESP8266 station connected to.
+-- @function [parent=#station] getrssi
+-- @return #number If station is connected to an access point, rssi is returned.
+-- @return #nil If station is not connected to an access point, nil is returned.
+
+-------------------------------------------------------------------------------
+-- Sets station hostname.
+-- @function [parent=#station] sethostname
+-- @param #string hostname must only contain letters, numbers and hyphens('-') and be 32 characters or less with first and last character being alphanumeric
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sets IP address, netmask, gateway address in station mode.
+-- @function [parent=#station] setip
+-- @param #table cfg table contain IP address, netmask, and gateway
+-- @return #boolean true if success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Sets MAC address in station mode.
+-- @function [parent=#station] setmac
+-- @param #string mac MAC address in string e.g. "DE:AD:BE:EF:7A:C0"
+-- @return #boolean true if success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Gets the current status in station mode.
+-- @function [parent=#station] status
+-- @return #number wifi station status 0~5 as defined in constants
+
+
+-------------------------------------------------------------------------------
+-- The ap mode type
+-- @type accesspoint
+
+-------------------------------------------------------------------------------
+-- AP mode functions
+-- @field [parent=#wifi] #accesspoint ap
+
+-------------------------------------------------------------------------------
+-- Sets SSID and password in AP mode. Be sure to make the password at least 8 characters long!
+-- If you don't it will default to no password and not set the SSID!
+-- It will still work as an access point but use a default SSID like e.g. NODE-9997C3.
+-- NOTE: SoftAP Configuration will be retained until changed even if device is turned off.
+-- @function [parent=#accesspoint] config
+-- @param #table cfg table with ssid, pwd, auth (wifi auth constant), channel (1-14 default 6), hidden (0 or 1 default 0), max (connections 1-4 default 4), beacon (interval 10-60000 default 100)
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Deauths (forcibly removes) a client from the ESP access point by sending a corresponding IEEE802.11 management packet (first) and removing the client from it's data structures (afterwards).
+-- The IEEE802.11 reason code used is 2 for "Previous authentication no longer valid"(AUTH_EXPIRE).
+-- @function [parent=#accesspoint] deauth
+-- @param #string mac MAC address of station to be deauthed. Note: if this field is left blank, all currently connected stations will get deauthed.
+-- @return #boolean Returns true unless called while the ESP is in the STATION opmode.
+
+-------------------------------------------------------------------------------
+-- Gets broadcast address in AP mode.
+-- @function [parent=#accesspoint] getbroadcast
+-- @return #string broadcast address in string, for example "192.168.0.255"
+-- @return #nil returns nil if IP address = "0.0.0.0"
+
+-------------------------------------------------------------------------------
+-- Gets table of clients connected to device in AP mode.
+-- @function [parent=#accesspoint] getclient
+-- @return #table table of connected clients (mac, ip)
+
+-------------------------------------------------------------------------------
+-- Gets IP address, netmask and gateway address in AP mode.
+-- @function [parent=#accesspoint] getip
+-- @return #string, #string, #string ip, netmask, gateway address
+-- @return #nil Returns nil if IP = "0.0.0.0".
+
+-------------------------------------------------------------------------------
+-- Gets MAC address in AP mode.
+-- @function [parent=#accesspoint] getmac
+-- @return #string MAC address as string, for example "1A-33-44-FE-55-BB"
+
+-------------------------------------------------------------------------------
+-- Sets IP address, netmask and gateway address in AP mode.
+-- @function [parent=#accesspoint] setip
+-- @param #table cfg table contain IP address, netmask, and gateway
+-- @return #boolean true if successful, false otherwise
+
+-------------------------------------------------------------------------------
+-- Sets MAC address in AP mode.
+-- @function [parent=#accesspoint] setmac
+-- @param #string mac MAC address in byte string, for example "AC-1D-1C-B1-0B-22"
+-- @return #boolean true if successful, false otherwise
+
+
+-------------------------------------------------------------------------------
+-- The ap dhcp mode type
+-- @type apdhcp
+
+-------------------------------------------------------------------------------
+-- AP mode dhcp functions
+-- @field [parent=#accesspoint] #apdhcp dhcp
+
+-------------------------------------------------------------------------------
+-- Configure the dhcp service.
+-- Currently only supports setting the start address of the dhcp address pool.
+-- @function [parent=#apdhcp] config
+-- @param #table dhcp_config table containing the start-IP of the DHCP address pool, eg. "192.168.1.100"
+-- @return #number, #number pool\_startip, pool\_endip
+
+-------------------------------------------------------------------------------
+-- Starts the DHCP service.
+-- @function [parent=#apdhcp] start
+-- @return #boolean boolean indicating success
+
+-------------------------------------------------------------------------------
+-- Stops the DHCP service.
+-- @function [parent=#apdhcp] stop
+-- @return #boolean boolean indicating success
+
+return nil
