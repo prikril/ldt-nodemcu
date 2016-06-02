@@ -46,17 +46,18 @@ Not all functions from "math" are available! Consider https://github.com/nodemcu
 
 ##Modules integrated
 The following table shows the progress of integration of the NodeMCU modules for LDT.
-In addition you see which modules are availabe in the specific NodeMCU versions.
+In addition you see which modules are available in the specific NodeMCU versions as defined by the NodeMCU developers.
+(Select "master" or "dev" branch at http://nodemcu-build.com/ and compare the available modules for more information.)
 
-Note: The IDE doesn't know which modules are included in your custom NodeMCU firmware.
-You will always get displayed all modules for autocompletion that are in the Execution Environment Zip!
-Some modules include functions that are not available in 1.4.0 but 1.5.1 (e.g. `wifi.sta.getrssi()`).
+Note: The IDE doesn't know which modules are included in your custom NodeMCU firmware build.
+You will always get displayed all modules and functions for autocompletion that are integrated in the selected Execution Environment!
 
 | Module       | Integration  | NodeMCU 1.4.0 | NodeMCU 1.5.1 | Comment                                |
 | ------------ |:------------:|:-------------:|:-------------:| -------------------------------------- |
 | am2320       | no           | no            | yes           |                                        |
 | bit          | full         | yes           | yes           |                                        |
 | dht          | full         | yes           | yes           |                                        |
+| enduser setup| no           | yes           | yes           |                                        |
 | file         | partly       | yes           | yes           |                                        |
 | gpio         | full         | yes           | yes           |                                        |
 | http         | no           | no            | yes           |                                        |
@@ -70,7 +71,7 @@ Some modules include functions that are not available in 1.4.0 but 1.5.1 (e.g. `
 
 * You need a module that isn't already listed here?
 
-* You need a function that isn't already integrated?
+* You need a function that isn't already integrated? (Note: Some functions are not available in 1.4.0 but 1.5.1 e.g. `wifi.sta.getrssi()`.)
 
 * You found a mistake in this project?
 
