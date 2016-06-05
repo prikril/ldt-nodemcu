@@ -1,10 +1,12 @@
 # LDT NodeMCU Integration
 
-This project integrates NodeMCU support in Lua Development Tools (LDT) as a new Execution Environment.
+This project integrates NodeMCU support in Lua Development Tools (LDT) as an new Execution Environment.
 
-**No debugging support! Only autocompletion!**
+As a result you will get an good NodeMCU IDE to write better code more easier.
 
-LDT can be a downloaded as a standalone IDE or as a part of Eclipse IDE.
+**No debugging support! Only autocompletion (autocomplete, code completion, content assist)!**
+
+LDT can be downloaded as an standalone IDE or as a part of Eclipse IDE.
 
 More Infos at: https://eclipse.org/ldt/
 
@@ -15,7 +17,11 @@ NodeMCU is a eLua based firmware for ESP8266 chips to run Lua programs.
 You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use other methods https://nodemcu.readthedocs.io/en/dev/en/build/).
 
 ##Installation
-Download the zip file in the "release" directory of your desired NodeMCU Version of this repository.
+Download the zip file in the "release" directory of your desired NodeMCU Version of this repository or use the direct links:
+
+NodeMCU 1.4.0: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.4.0/release/lua5.1-nodemcu1.4.0.zip
+
+NodeMCU 1.5.1: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.1/release/lua5.1-nodemcu1.5.1.zip
 
 Open LDT (or Eclipse) and go to Preferences. On the left side choose "Lua".
 
@@ -32,6 +38,13 @@ Click on "OK" to close the preferences window.
 Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution Environment.
 
 ![Create Project](/pics/create-proj01.png?raw=true)
+
+##Install Updates
+If you want to add a new version of the NodeMCU Execution Environment, you need to remove the current one first.
+
+Select the execution environment in the list as described above. Click the "Remove" button.
+
+Then add the new zip. (Same steps as above.)
 
 ##Autocompletion support
 If your project's Execution Environment is set correctly, you will get autocompletion support for NodeMCU specific functions.
@@ -71,7 +84,7 @@ You will always get displayed all modules and functions for autocompletion that 
 
 * You need a module that isn't already listed here?
 
-* You need a function that isn't already integrated? (Note: Some functions are not available in 1.4.0 but 1.5.1 e.g. `wifi.sta.getrssi()`.)
+* You need a function that isn't already integrated? (Note: Some functions are not available in NodeMCU 1.4.0 but 1.5.1 e.g. `wifi.sta.getrssi()`.)
 
 * You found a mistake in this project?
 
@@ -82,3 +95,5 @@ You will always get displayed all modules and functions for autocompletion that 
 https://wiki.eclipse.org/LDT/User_Area/Tutorial/Create_a_simple_Execution_Environment
 
 https://wiki.eclipse.org/LDT/User_Area/Execution_Environment_file_format
+
+https://www.eclipse.org/forums/index.php/t/1065750/ (Possible to install NodeMCU in LDT)
