@@ -97,7 +97,7 @@
 
 -------------------------------------------------------------------------------
 -- Connects to the broker specified by the given host, port, and secure options.
--- Syntax: mqtt:connect(host[, port[, secure[, autoreconnect]]][, function(client)[, function(client, reason)]])
+-- Syntax: connect(host[, port[, secure[, autoreconnect]]][, function(client)[, function(client, reason)]])
 -- @function [parent=#client] connect
 -- @param self
 -- @param #string host host, domain or IP (string)
@@ -112,7 +112,7 @@
 -- Setup Last Will and Testament (optional).
 -- A broker will publish a message with qos = 0, retain = 0, data = "offline" to topic "/lwt" if client does not send keepalive packet.
 -- 
--- Syntax: mqtt:lwt(topic, message[, qos[, retain]])
+-- Syntax: lwt(topic, message[, qos[, retain]])
 -- @function [parent=#client] lwt
 -- @param self
 -- @param #string topic the topic to publish to (string)
@@ -123,7 +123,7 @@
 
 -------------------------------------------------------------------------------
 -- Registers a callback function for an event.
--- Syntax: mqtt:on(event, function(client[, topic[, message]]))
+-- Syntax: on(event, function(client[, topic[, message]]))
 -- @function [parent=#client] on
 -- @param self
 -- @param #string event can be "connect", "message" or "offline"
@@ -132,7 +132,7 @@
 
 -------------------------------------------------------------------------------
 -- Publishes a message.
--- Syntax: mqtt:publish(topic, payload, qos, retain[, function(client)])
+-- Syntax: publish(topic, payload, qos, retain[, function(client)])
 -- @function [parent=#client] publish
 -- @param self
 -- @param #string topic the topic to publish to (topic string)
@@ -144,9 +144,9 @@
 
 -------------------------------------------------------------------------------
 -- Subscribes to one or several topics.
--- Syntax: mqtt:subscribe(topic, qos[, function(client)])
+-- Syntax: subscribe(topic, qos[, function(client)])
 -- 
--- Syntax: mqtt:subscribe(table[, function(client)])
+-- Syntax: subscribe(table[, function(client)])
 -- @function [parent=#client] subscribe
 -- @param self
 -- @param #string topic a topic string
@@ -157,9 +157,9 @@
 
 -------------------------------------------------------------------------------
 -- Unsubscribes from one or several topics.
--- Syntax: mqtt:unsubscribe(topic[, function(client)])
+-- Syntax: unsubscribe(topic[, function(client)])
 -- 
--- Syntax: mqtt:unsubscribe(table[, function(client)])
+-- Syntax: unsubscribe(table[, function(client)])
 -- @function [parent=#client] unsubscribe
 -- @param self
 -- @param #string topic a topic string
