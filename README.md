@@ -75,16 +75,18 @@ You will always get displayed all modules and functions for autocompletion that 
 | gpio         | full         | yes           | yes           |                                        |
 | http         | no           | no            | yes           |                                        |
 | i2c          | full         | yes           | yes           |                                        |
-| mqtt         | no           | yes           | yes           |                                        |
+| mqtt         | full         | yes           | yes           | has some overloaded functions          |
 | net          | partly       | yes           | yes           |                                        |
 | node         | partly       | yes           | yes           |                                        |
 | ow           | no           | yes           | yes           |                                        |
 | tmr          | full         | yes           | yes           |                                        |
 | wifi         | full\*       | yes           | yes           | \*full, except: eventmon, sleep, smart |
 
+(Note: Some functions are not available in NodeMCU 1.4.0 but 1.5.1 e.g. `wifi.sta.getrssi()`.)
+
 * You need a module that isn't already listed here?
 
-* You need a function that isn't already integrated? (Note: Some functions are not available in NodeMCU 1.4.0 but 1.5.1 e.g. `wifi.sta.getrssi()`.)
+* You need a function that isn't already integrated?
 
 * You found a mistake in this project?
 
