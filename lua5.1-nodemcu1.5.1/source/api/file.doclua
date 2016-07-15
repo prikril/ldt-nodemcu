@@ -7,13 +7,6 @@
 
 
 -------------------------------------------------------------------------------
--- wifi mode: STATION.
--- for when the device is connected to a WiFi router. This is often done to give the device access to the Internet.
--- Returns 1
--- @field [parent=#wifi] #number STATION
-
-
--------------------------------------------------------------------------------
 -- Closes the open file, if any.
 -- @function [parent=#file] close
 -- @return #nil
