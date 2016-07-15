@@ -15,7 +15,35 @@
 -- Determines whether the specified file exists.
 -- @function [parent=#file] exists
 -- @param #string filename file to check
--- @return #boolean true of the file exists (even if 0 bytes in size), and false if it does not exist
+-- @return #boolean true if the file exists (even if 0 bytes in size), and false if it does not exist
+
+-------------------------------------------------------------------------------
+-- Flushes any pending writes to the file system, ensuring no data is lost on a restart.
+-- Closing the open file using file.close() performs an implicit flush as well.
+-- @function [parent=#file] flush
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Format the file system.
+-- Completely erases any existing file system and writes a new one.
+-- Depending on the size of the flash chip in the ESP, this may take several seconds.
+-- @function [parent=#file] format
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Returns the flash address and physical size of the file system area, in bytes.
+-- @function [parent=#file] fscfg
+-- @return #number, #number flash address, size
+
+-------------------------------------------------------------------------------
+-- Return size information for the file system, in bytes.
+-- @function [parent=#file] fsinfo
+-- @return #number, #number, #number remaining, used, total
+
+-------------------------------------------------------------------------------
+-- Lists all files in the file system.
+-- @function [parent=#file] list
+-- @return #table a lua table which contains the {file name: file size} pairs
 
 -------------------------------------------------------------------------------
 -- Opens a file for access, potentially creating it (for write modes).
@@ -27,9 +55,21 @@
 -- @return #boolean true if file opened ok.
 
 -------------------------------------------------------------------------------
+-- Read content from the open file.
+-- Syntax: file.read([n\_or\_str])
+-- If nothing passed in, read up to LUAL\_BUFFERSIZE bytes (default 1024) or the entire file (whichever is smaller).
+-- If passed a number n, then read the file until the lesser of n bytes, LUAL\_BUFFERSIZE bytes, or EOF is reached.
+-- Specifying a number larger than the buffer size will read the buffer size.
+-- If passed a string str, then read until str appears next in the file, LUAL\_BUFFERSIZE bytes have been read, or EOF is reached.
+-- @function [parent=#file] read
+-- @param #string n_or_str nothing, number oder string
+-- @return #string File content as a string
+-- @return #nil Return nil when EOF.
+
+-------------------------------------------------------------------------------
 -- Read the next line from the open file.
 -- Lines are defined as zero or more bytes ending with a EOL ('\n') byte.
--- If the next line is longer than LUAL_BUFFERSIZE, this function only returns the first LUAL_BUFFERSIZE bytes (this is 1024 bytes by default).
+-- If the next line is longer than LUAL\_BUFFERSIZE, this function only returns the first LUAL\_BUFFERSIZE bytes (this is 1024 bytes by default).
 -- @function [parent=#file] readline
 -- @return #string File content in string, line by line, including EOL('\n').
 -- @return #nil Return nil when EOF.
@@ -40,6 +80,33 @@
 -- @function [parent=#file] remove
 -- @param #string filename file to remove
 -- @return #nil
+
+-------------------------------------------------------------------------------
+-- Renames a file.
+-- If a file is currently open, it will be closed first.
+-- @function [parent=#file] rename
+-- @param #string oldname old file name
+-- @param #string newname new file name
+-- @return #boolean true on success, false on error.
+
+-------------------------------------------------------------------------------
+-- Sets and gets the file position, measured from the beginning of the file, to the position given by offset plus a base specified by the string whence.
+-- Syntax: file.seek([whence [, offset]]).
+-- "set": base is position 0 (beginning of the file).
+-- "cur": base is current position (default value).
+-- "end": base is end of file.
+-- @function [parent=#file] seek
+-- @param #string whence "set", "cur" or "end"
+-- @param #number offset default 0
+-- @return #number If no parameters are given, the function simply returns the current file offset.
+-- @return #nil on error
+
+-------------------------------------------------------------------------------
+-- Write a string to the open file.
+-- @function [parent=#file] write
+-- @param #string string content to write to file
+-- @return #boolean true if write ok
+-- @return #nil on error
 
 -------------------------------------------------------------------------------
 -- Write a string to the open file and append '\n' at the end.

@@ -66,6 +66,8 @@ Note: The IDE doesn't know which modules are included in your custom NodeMCU fir
 You will always get displayed all modules and functions for autocompletion that are integrated in the selected Execution Environment!
 
 The current (2016-06-03) version of NodeMCU Master branch is 1.5.1, the old version 1.4.0 is not supported by this project anymore.
+The old version (1.4.0) won't get updates any longer (since 2016-06-03) by this project.
+
 Please use the latest version from NodeMCU to get the newest modules and functions.
 
 | Module       | Integration  | 1.4.0 (old)   | 1.5.1         | Comment                                |
@@ -74,7 +76,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | bit          | full         | yes           | yes           |                                        |
 | dht          | full         | yes           | yes           |                                        |
 | enduser setup| no           | yes           | yes           |                                        |
-| file         | partly       | yes           | yes           |                                        |
+| file         | full         | yes           | yes           |                                        |
 | gpio         | full         | yes           | yes           |                                        |
 | http         | no           | no            | yes           |                                        |
 | i2c          | full         | yes           | yes           |                                        |
