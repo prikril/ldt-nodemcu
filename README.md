@@ -82,7 +82,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | i2c          | full         | yes           | yes           |                                        |
 | mqtt         | full         | yes           | yes           | has some overloaded functions          |
 | net          | partly       | yes           | yes           |                                        |
-| node         | partly       | yes           | yes           |                                        |
+| node         | full\*       | yes           | yes           | \*full, except: stripdebug, osprint, egc and deprecated functions |
 | ow           | no           | yes           | yes           |                                        |
 | tmr          | full         | yes           | yes           |                                        |
 | wifi         | full\*       | yes           | yes           | \*full, except: eventmon, sleep, smart |

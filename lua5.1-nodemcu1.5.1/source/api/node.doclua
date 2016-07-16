@@ -5,9 +5,76 @@
 
 
 -------------------------------------------------------------------------------
+-- CPU80MHZ.
+-- Returns 80
+-- @field [parent=#node] #number CPU80MHZ
+
+-------------------------------------------------------------------------------
+-- CPU160MHZ.
+-- Returns 160
+-- @field [parent=#node] #number CPU160MHZ
+
+
+-------------------------------------------------------------------------------
+-- Returns the boot reason and extended reset info.
+-- The first value returned is the raw code (1-4).
+-- The second value returned is the extended reset cause (0-6).
+-- In general, the extended reset cause supercedes the raw code.
+-- The raw code is kept for backwards compatibility only.
+-- @function [parent=#node] bootreason
+-- @return #number rawcode
+-- @return #number reason
+
+-------------------------------------------------------------------------------
+-- Returns the ESP chip ID.
+-- @function [parent=#node] chipid
+-- @return #number chip ID (number)
+
+-------------------------------------------------------------------------------
 -- Compiles a Lua text file into Lua bytecode, and saves it as .lc file.
 -- @function [parent=#node] compile
 -- @param #string filename name of Lua text file
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Enters deep sleep mode, wakes up when timed out.
+-- This function can only be used in the condition that esp8266 PIN32(RST) and PIN8(XPD\_DCDC aka GPIO16) are connected together.
+-- @function [parent=#node] dsleep
+-- @param #number us number (integer) or nil, sleep time in micro second. 0 = sleep forever. nil = will not set sleep time.
+-- @param #number option number (integer) or nil. If nil, it will use last alive setting as default option.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Returns the flash chip ID.
+-- @function [parent=#node] flashid
+-- @return #number flash ID (number)
+
+-------------------------------------------------------------------------------
+-- Returns the current available heap size in bytes.
+-- Note that due to fragmentation, actual allocations of this size may not be possible.
+-- @function [parent=#node] heap
+-- @return #number system heap size left in bytes (number)
+
+-------------------------------------------------------------------------------
+-- Returns NodeMCU version, chipid, flashid, flash size, flash mode, flash speed.
+-- @function [parent=#node] info
+-- @return #number, #number, #number, #number, #number, #number, #number, #number majorVer, minorVer, devVer, chipid, flashid, flashsize, flashmode, flashspeed
+
+-------------------------------------------------------------------------------
+-- Submits a string to the Lua interpreter.
+-- Similar to pcall(loadstring(str)), but without the single-line limitation.
+-- This function only has an effect when invoked from a callback.
+-- Using it directly on the console does not work.
+-- @function [parent=#node] input
+-- @param #string str Lua chunk
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Redirects the Lua interpreter output to a callback function.
+-- Optionally also prints it to the serial console.
+-- @function [parent=#node] output
+-- @param #function output_fn(str) a function accept every output as str, and can send the output to a socket (or maybe a file).
+-- @param #number serial_debug 1: output also show in serial. 0: no serial output.
 -- @return #nil
 
 -------------------------------------------------------------------------------
@@ -16,8 +83,56 @@
 -- @return #nil
 
 -------------------------------------------------------------------------------
--- Restores system configuration to defaults using the SDK function system_restore(), which doesn't document precisely what it erases/restores.
+-- Restores system configuration to defaults using the SDK function system\_restore(), which doesn't document precisely what it erases/restores.
 -- @function [parent=#node] restore
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Change the working CPU Frequency.
+-- @function [parent=#node] setcpufreq
+-- @param #number speed constant 'node.CPU80MHZ' or 'node.CPU160MHZ'
+-- @return #number target CPU frequency (number)
+
+-------------------------------------------------------------------------------
+-- Change the working CPU Frequency.
+-- @function [parent=#node] setcpufreq
+-- @param #number speed constant 'node.CPU80MHZ' or 'node.CPU160MHZ'
+-- @return #number target CPU frequency (number)
+
+
+-------------------------------------------------------------------------------
+-- The task type
+-- @type task
+
+-------------------------------------------------------------------------------
+-- Task functions
+-- @field [parent=#node] #task task
+
+
+-------------------------------------------------------------------------------
+-- LOW_PRIORITY.
+-- Returns 0
+-- @field [parent=#task] #number LOW_PRIORITY
+
+-------------------------------------------------------------------------------
+-- MEDIUM_PRIORITY.
+-- Returns 1
+-- @field [parent=#task] #number MEDIUM_PRIORITY
+
+-------------------------------------------------------------------------------
+-- HIGH_PRIORITY.
+-- Returns 2
+-- @field [parent=#task] #number HIGH_PRIORITY
+
+
+-------------------------------------------------------------------------------
+-- Enable a Lua callback or task to post another task request.
+-- Syntax: node.task.post([task\_priority], function)
+-- Note that as per the example multiple tasks can be posted in any task, but the highest priority is always delivered first.
+-- If the task queue is full then a queue full error is raised.
+-- @function [parent=#task] post
+-- @param #number task_priority (optional) If the priority is omitted then this defaults to node.task.MEDIUM\_PRIORITY
+-- @param #function func a callback function to be executed when the task is run.
 -- @return #nil
 
 return nil
