@@ -2,7 +2,9 @@
 -- net module.
 -- @module net
 
---- A socket
+
+-------------------------------------------------------------------------------
+-- Socket type
 -- @type socket
 
 -------------------------------------------------------------------------------
@@ -20,6 +22,29 @@
 -- @return #nil
 
 -------------------------------------------------------------------------------
+-- Provides DNS resolution for a hostname.
+-- Syntax: dns(domain, function(net.socket, ip))
+-- @function [parent=#socket] dns
+-- @param self
+-- @param #string domain domain name
+-- @param #function function function(net.socket, ip) callback function. The first parameter is the socket, the second parameter is the IP address as a string.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Retrieve port and ip of peer.
+-- @function [parent=#socket] getpeer
+-- @param self
+-- @return #string ip of peer
+-- @return #string port of peer
+
+-------------------------------------------------------------------------------
+-- Throttle data reception by placing a request to block the TCP receive function.
+-- This request is not effective immediately, Espressif recommends to call it while reserving 5*1460 bytes of memory.
+-- @function [parent=#socket] hold
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
 -- Register callback functions for specific events.
 -- Syntax: on(event, function(socket[, string]))
 -- @function [parent=#socket] on
@@ -33,11 +58,19 @@
 -- Syntax: send(string[, function(sent)])
 -- @function [parent=#socket] send
 -- @param self
--- @param #string event string, which can be "connection", "reconnection", "disconnection", "receive" or "sent"
+-- @param #string data in string which will be sent to server
 -- @param #function function OPTIONAL: callback function for sending string
 -- @return #nil
 
---- A server
+-------------------------------------------------------------------------------
+-- Unblock TCP receiving data by revocation of a preceding hold().
+-- @function [parent=#socket] unhold
+-- @param self
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- Server type
 -- @type server
 
 -------------------------------------------------------------------------------
@@ -51,10 +84,59 @@
 -- Syntax: listen(port,[ip],function(socket))
 -- @function [parent=#server] listen
 -- @param self
--- @param ip OPTIONAL: IP address string, can be omitted
+-- @param #string ip OPTIONAL: IP address string, can be omitted
 -- @param #number port port number
 -- @param #function function callback function, pass to caller function as param if a connection is created successfully
 -- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- DNS type
+-- @type dns
+
+-------------------------------------------------------------------------------
+-- DNS functions
+-- @field [parent=#net] #dns dns
+
+-------------------------------------------------------------------------------
+-- Gets the IP address of the DNS server used to resolve hostnames.
+-- @function [parent=#dns] getdnsserver
+-- @param #number dns_index which DNS server to get (range 0~1)
+-- @return #string IP address (string) of DNS server
+
+-------------------------------------------------------------------------------
+-- Resolve a hostname to an IP address.
+-- Doesn't require a socket like net.socket.dns().
+-- Syntax: net.dns.resolve(host, function(sk, ip))
+-- @function [parent=#dns] resolve
+-- @param #string host hostname to resolve
+-- @param #function function function(sk, ip) callback called when the name was resolved. Don't use sk, it's a socket used internally to resolve the hostname.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sets the IP of the DNS server used to resolve hostnames.
+-- Default: resolver1.opendns.com (208.67.222.222).
+-- You can specify up to 2 DNS servers.
+-- @function [parent=#dns] setdnsserver
+-- @param #string dns_ip_addr IP address of a DNS server
+-- @param #string dns_index which DNS server to set (range 0~1). Hence, it supports max. 2 servers.
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- Cert type
+-- @type cert
+
+-------------------------------------------------------------------------------
+-- net.cert module.
+-- This controls certificate verification when SSL is in use.
+-- @field [parent=#net] #cert cert
+
+-------------------------------------------------------------------------------
+-- Controls the certificate verification process when the Nodemcu makes a secure connection.
+-- @function [parent=#cert] verify
+-- @param #string enable_or_pemdata A boolean which indicates whether verification should be enabled or not. The default at boot is false. OR: A string containing the CA certificate to use for verification.
+-- @return #boolean true if it worked. Can throw a number of errors if invalid data is supplied.
 
 
 -------------------------------------------------------------------------------
@@ -80,5 +162,19 @@
 -- @param #number type net.TCP or net.UDP
 -- @param #number timeout for a TCP server timeout is 1~28'800 seconds (for an inactive client to be disconnected)
 -- @return #server net.server sub module
+
+-------------------------------------------------------------------------------
+-- Join multicast group.
+-- @function [parent=#net] multicastJoin
+-- @param #string if_ip string containing the interface ip to join the multicast group. "any" or "" affects all interfaces.
+-- @param #string multicast_ip of the group to join
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Leave multicast group.
+-- @function [parent=#net] multicastLeave
+-- @param #string if_ip string containing the interface ip to leave the multicast group. "any" or "" affects all interfaces.
+-- @param #string multicast_ip of the group to leave
+-- @return #nil
 
 return nil
