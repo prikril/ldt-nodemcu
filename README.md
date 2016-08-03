@@ -75,7 +75,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | am2320       | no           | no            | yes           |                                        |
 | bit          | full         | yes           | yes           |                                        |
 | dht          | full         | yes           | yes           |                                        |
-| enduser setup| no           | yes           | yes           |                                        |
+| enduser_setup| full         | yes           | yes           |                                        |
 | file         | full         | yes           | yes           |                                        |
 | gpio         | full         | yes           | yes           |                                        |
 | http         | full         | no            | yes           |                                        |

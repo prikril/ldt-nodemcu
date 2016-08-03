@@ -45,6 +45,11 @@
 -- @field[parent = #global] dht#dht dht preloaded module
 
 ------------------------------------------------------------------------------
+-- The enduser setup NodeMCU Library.
+-- This is a global variable which hold the preloaded @{enduser_setup} module.
+-- @field[parent = #global] enduser_setup#enduser_setup enduser_setup preloaded module
+
+------------------------------------------------------------------------------
 -- The File NodeMCU Library.
 -- This is a global variable which hold the preloaded @{file} module.
 -- @field[parent = #global] file#file file preloaded module
