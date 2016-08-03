@@ -78,7 +78,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | enduser setup| no           | yes           | yes           |                                        |
 | file         | full         | yes           | yes           |                                        |
 | gpio         | full         | yes           | yes           |                                        |
-| http         | no           | no            | yes           |                                        |
+| http         | full         | no            | yes           |                                        |
 | i2c          | full         | yes           | yes           |                                        |
 | mqtt         | full         | yes           | yes           | has some overloaded functions          |
 | net          | full\*       | yes           | yes           | \*full, except: on and send for UDP server  |

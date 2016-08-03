@@ -55,6 +55,11 @@
 -- @field[parent = #global] gpio#gpio gpio preloaded module
 
 ------------------------------------------------------------------------------
+-- The HTTP NodeMCU Library.
+-- This is a global variable which hold the preloaded @{http} module.
+-- @field[parent = #global] http#http http preloaded module
+
+------------------------------------------------------------------------------
 -- The I2C NodeMCU Library.
 -- This is a global variable which hold the preloaded @{i2c} module.
 -- @field[parent = #global] i2c#i2c i2c preloaded module
