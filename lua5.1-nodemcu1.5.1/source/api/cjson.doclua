@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+-- cjson module.
+-- The JSON support module.
+-- Allows encoding and decoding to/from JSON.
+-- @module cjson
+
+
+-------------------------------------------------------------------------------
+-- Encode a Lua table to a JSON string.
+-- Please note that nested tables can require a lot of memory to encode.
+-- To catch out-of-memory errors, use pcall().
+-- @function [parent=#cjson] encode
+-- @param #table table data to encode
+-- @return #string JSON string
+
+-------------------------------------------------------------------------------
+-- Decode a JSON string to a Lua table.
+-- @function [parent=#cjson] decode
+-- @param #string str JSON string to decode
+-- @return #table Lua table representation of the JSON data
+
+return nil

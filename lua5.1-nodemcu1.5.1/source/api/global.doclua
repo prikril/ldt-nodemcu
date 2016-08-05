@@ -40,6 +40,11 @@
 -- @field[parent = #global] bit#bit bit preloaded module
 
 ------------------------------------------------------------------------------
+-- The CJSON NodeMCU Library.
+-- This is a global variable which hold the preloaded @{cjson} module.
+-- @field[parent = #global] cjson#cjson cjson preloaded module
+
+------------------------------------------------------------------------------
 -- The DHT NodeMCU Library.
 -- This is a global variable which hold the preloaded @{dht} module.
 -- @field[parent = #global] dht#dht dht preloaded module

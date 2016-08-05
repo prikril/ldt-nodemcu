@@ -79,6 +79,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | ------------ |:------------:|:-------------:|:-------------:| -------------------------------------- |
 | am2320       | no           | no            | yes           |                                        |
 | bit          | full         | yes           | yes           |                                        |
+| cjson        | full         | yes           | yes           |                                        |
 | dht          | full         | yes           | yes           |                                        |
 | enduser_setup| full         | yes           | yes           |                                        |
 | file         | full         | yes           | yes           |                                        |
