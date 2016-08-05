@@ -25,7 +25,7 @@ Download the zip file in the "release" directory of your desired NodeMCU Version
 
 **Current (recommended version):**
 
-**NodeMCU 1.5.1: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.1/release/lua5.1-nodemcu1.5.1.zip**
+**NodeMCU 1.5.x: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.x/release/lua5.1-nodemcu1.5.x.zip**
 
 
 Open LDT (or Eclipse) and go to Preferences. On the left side choose "Lua".
@@ -70,12 +70,12 @@ In addition you see which modules are available in the specific NodeMCU versions
 Note: The IDE doesn't know which modules are included in your custom NodeMCU firmware build.
 You will always get displayed all modules and functions for autocompletion that are integrated in the selected Execution Environment!
 
-The current (2016-06-03) version of NodeMCU Master branch is 1.5.1, the old version 1.4.0 is not supported by this project anymore.
+The current (2016-06-03) version of NodeMCU Master branch is 1.5.x, the old version 1.4.0 is not supported by this project anymore.
 The old version (1.4.0) won't get updates any longer (since 2016-06-03) by this project.
 
 Please use the latest version from NodeMCU to get the newest modules and functions.
 
-| Module       | Integration  | 1.4.0 (old)   | 1.5.1         | Comment                                |
+| Module       | Integration  | 1.4.0 (old)   | 1.5.x         | Comment                                |
 | ------------ |:------------:|:-------------:|:-------------:| -------------------------------------- |
 | am2320       | no           | no            | yes           |                                        |
 | bit          | full         | yes           | yes           |                                        |
@@ -93,7 +93,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | tmr          | full         | yes           | yes           |                                        |
 | wifi         | full\*       | yes           | yes           | \*full, except: eventmon, sleep, smart |
 
-(Note: Some functions are not available in NodeMCU 1.4.0 but 1.5.1 e.g. `wifi.sta.getrssi()`.)
+(Note: Some modules and functions are not available in NodeMCU 1.4.0 but 1.5.x e.g. `wifi.sta.getrssi()`.)
 
 * You need a module that isn't already listed here?
 
