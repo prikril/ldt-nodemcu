@@ -19,11 +19,11 @@ You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use o
 ##Installation
 Download the zip file in the "release" directory of your desired NodeMCU Version of this repository or use the direct links:
 
-*old (only minimal LDT integration):*
+*Old (only minimal LDT integration):*
 
 *NodeMCU 1.4.0: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.4.0/release/lua5.1-nodemcu1.4.0.zip*
 
-**current (recommended version):**
+**Current (recommended version):**
 
 **NodeMCU 1.5.1: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.1/release/lua5.1-nodemcu1.5.1.zip**
 
