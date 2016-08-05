@@ -1,0 +1,121 @@
+-------------------------------------------------------------------------------
+-- ow (1-Wire) module.
+-- This module provides functions to work with the 1-Wire device communications bus system.
+-- @module ow
+
+
+-------------------------------------------------------------------------------
+-- Computes the 1-Wire CRC16 and compare it against the received CRC.
+-- Syntax: ow.check\_crc16(buf, inverted\_crc0, inverted\_crc1[, crc])
+-- @function [parent=#ow] check_crc16
+-- @param #string buf string value, data to be calculated check sum in string
+-- @param #string inverted_crc0 LSB of received CRC
+-- @param #string inverted_crc1 MSB of received CRC
+-- @param #string crc CRC starting value (optional)
+-- @return #boolean true if the CRC matches, false otherwise
+
+-------------------------------------------------------------------------------
+-- Computes a Dallas Semiconductor 16 bit CRC.
+-- This is required to check the integrity of data received from many 1-Wire devices.
+-- Syntax: ow.crc16(buf[, crc])
+-- @function [parent=#ow] crc16
+-- @param #string buf string value, data to be calculated check sum in string
+-- @param #string crc CRC starting value (optional)
+-- @return #string the CRC16 as defined by Dallas Semiconductor
+
+-------------------------------------------------------------------------------
+-- Computes a Dallas Semiconductor 8 bit CRC, these are used in the ROM and scratchpad registers.
+-- @function [parent=#ow] crc8
+-- @param #string buf string value, data to be calculated check sum in string
+-- @return #string CRC result as byte
+
+-------------------------------------------------------------------------------
+-- Stops forcing power onto the bus.
+-- You only need to do this if you used the 'power' flag to ow.write() or used a ow.write\_bytes() and aren't about to do another read or write.
+-- @function [parent=#ow] depower
+-- @param #number pin 1~12, I/O index
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Reads a byte.
+-- @function [parent=#ow] read
+-- @param #number pin 1~12, I/O index
+-- @return #string byte read from slave device
+
+-------------------------------------------------------------------------------
+-- Reads multi bytes.
+-- @function [parent=#ow] read_bytes
+-- @param #number pin 1~12, I/O index
+-- @param #number size number of bytes to be read from slave device
+-- @return #string bytes read from slave device
+
+-------------------------------------------------------------------------------
+-- Performs a 1-Wire reset cycle.
+-- @function [parent=#ow] reset
+-- @param #number pin 1~12, I/O index
+-- @param #number size number of bytes to be read from slave device
+-- @return #number 1 if a device responds with a presence pulse
+-- @return #number 0 if there is no device or the bus is shorted or otherwise held low for more than 250 uS
+
+-------------------------------------------------------------------------------
+-- Clears the search state so that it will start from the beginning again.
+-- @function [parent=#ow] reset_search
+-- @param #number pin 1~12, I/O index
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Looks for the next device.
+-- @function [parent=#ow] search
+-- @param #number pin 1~12, I/O index
+-- @return #string rom_code string with length of 8 upon success. It contains the rom code of slave device.
+-- @return #nil Returns nil if search was unsuccessful.
+
+-------------------------------------------------------------------------------
+-- Issues a 1-Wire rom select command.
+-- Make sure you do the ow.reset(pin) first.
+-- @function [parent=#ow] select
+-- @param #number pin 1~12, I/O index
+-- @param #string rom string value, len 8, rom code of the salve device
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sets a pin in onewire mode.
+-- @function [parent=#ow] setup
+-- @param #number pin 1~12, I/O index
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Issues a 1-Wire rom skip command, to address all on bus.
+-- @function [parent=#ow] skip
+-- @param #number pin 1~12, I/O index
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sets up the search to find the device type family\_code.
+-- The search itself has to be initiated with a subsequent call to ow.search().
+-- @function [parent=#ow] target_search
+-- @param #number pin 1~12, I/O index
+-- @param #string family_code byte for family code
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Writes a byte.
+-- If power is 1 then the wire is held high at the end for parasitically powered devices.
+-- You are responsible for eventually depowering it by calling ow.depower() or doing another read or write.
+-- @function [parent=#ow] write
+-- @param #number pin 1~12, I/O index
+-- @param #string v byte to be written to salve device
+-- @param #number power 1 for wire being held high for parasitically powered devices
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Writes multi bytes.
+-- If power is 1 then the wire is held high at the end for parasitically powered devices.
+-- You are responsible for eventually depowering it by calling ow.depower() or doing another read or write.
+-- @function [parent=#ow] write_bytes
+-- @param #number pin 1~12, I/O index
+-- @param #string buf string to be written to salve device
+-- @param #number power 1 for wire being held high for parasitically powered devices
+-- @return #nil
+
+return nil

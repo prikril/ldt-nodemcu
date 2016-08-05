@@ -91,7 +91,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | mqtt         | full         | yes           | yes           | has some overloaded functions          |
 | net          | full\*       | yes           | yes           | \*full, except: on and send for UDP server  |
 | node         | full\*       | yes           | yes           | \*full, except: stripdebug, osprint, egc and deprecated functions |
-| ow           | no           | yes           | yes           |                                        |
+| ow (1-Wire)  | full         | yes           | yes           |                                        |
 | tmr          | full         | yes           | yes           |                                        |
 | wifi         | full\*       | yes           | yes           | \*full, except: eventmon, sleep, smart |
 
