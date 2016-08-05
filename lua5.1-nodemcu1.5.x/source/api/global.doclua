@@ -95,6 +95,11 @@
 -- @field[parent = #global] ow#ow ow preloaded module
 
 ------------------------------------------------------------------------------
+-- The PWM NodeMCU Library.
+-- This is a global variable which hold the preloaded @{pwm} module.
+-- @field[parent = #global] pwm#pwm pwm preloaded module
+
+------------------------------------------------------------------------------
 -- The Timer NodeMCU Library.
 -- This is a global variable which hold the preloaded @{tmr} module.
 -- @field[parent = #global] tmr#tmr tmr preloaded module
