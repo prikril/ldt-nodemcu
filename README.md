@@ -51,6 +51,8 @@ Select the execution environment in the list as described above. Click the "Remo
 
 Then add the new zip. (Same steps as above.)
 
+It may be necessary to restart the IDE.
+
 ##Autocompletion support
 If your project's Execution Environment is set correctly, you will get autocompletion support for NodeMCU specific functions.
 
