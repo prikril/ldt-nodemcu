@@ -19,15 +19,20 @@ You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use o
 ##Installation
 Download the zip file in the "release" directory of your desired NodeMCU Version of this repository or use the direct links:
 
-NodeMCU 1.4.0: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.4.0/release/lua5.1-nodemcu1.4.0.zip
+*old (only minimal LDT integration):*
 
-NodeMCU 1.5.1: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.1/release/lua5.1-nodemcu1.5.1.zip
+*NodeMCU 1.4.0: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.4.0/release/lua5.1-nodemcu1.4.0.zip*
+
+**current (recommended version):**
+
+**NodeMCU 1.5.1: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.1/release/lua5.1-nodemcu1.5.1.zip**
+
 
 Open LDT (or Eclipse) and go to Preferences. On the left side choose "Lua".
 
 Click on "Execution Environment" and then the "Add..." button.
 
-![Add zip](/pics/add-ee-compact01.png?raw=true)
+![Add zip](/pics/add-ee-compact02.png?raw=true)
 
 Select the downloaded zip file. Then you should see it in the list of the Execution Environments.
 
