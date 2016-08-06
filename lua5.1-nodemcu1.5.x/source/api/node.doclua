@@ -22,8 +22,7 @@
 -- In general, the extended reset cause supercedes the raw code.
 -- The raw code is kept for backwards compatibility only.
 -- @function [parent=#node] bootreason
--- @return #number rawcode
--- @return #number reason
+-- @return #number, #number rawcode, reason
 
 -------------------------------------------------------------------------------
 -- Returns the ESP chip ID.
@@ -101,6 +100,54 @@
 
 
 -------------------------------------------------------------------------------
+-- The EGC type
+-- @type egc
+
+-------------------------------------------------------------------------------
+-- EGC (Emergency Garbage Collector) functions
+-- @field [parent=#node] #egc egc
+
+
+-------------------------------------------------------------------------------
+-- NOT_ACTIVE.
+-- EGC inactive, no collection cycle will be forced in low memory situations.
+-- Returns 0
+-- @field [parent=#egc] #number NOT_ACTIVE
+
+-------------------------------------------------------------------------------
+-- ON\_ALLOC\_FAILURE.
+-- Try to allocate a new block of memory, and run the garbage collector if the allocation fails.
+-- If the allocation fails even after running the garbage collector, the allocator will return with error. 
+-- Returns 1
+-- @field [parent=#egc] #number ON_ALLOC_FAILURE
+
+-------------------------------------------------------------------------------
+-- ON\_MEM\_LIMIT.
+-- Run the garbage collector when the memory used by the Lua script goes beyond an upper limit.
+-- If the upper limit can't be satisfied even after running the garbage collector, the allocator will return with error.
+-- Returns 2
+-- @field [parent=#egc] #number ON_MEM_LIMIT
+
+-------------------------------------------------------------------------------
+-- ALWAYS.
+-- Run the garbage collector before each memory allocation.
+-- If the allocation fails even after running the garbage collector, the allocator will return with error.
+-- This mode is very efficient with regards to memory savings, but it's also the slowest.
+-- Returns 4
+-- @field [parent=#egc] #number ALWAYS
+
+
+-------------------------------------------------------------------------------
+-- Sets the Emergency Garbage Collector mode.
+-- The EGC whitepaper provides more detailed information on the EGC.
+-- Syntax: node.egc.setmode(mode, [param])
+-- @function [parent=#egc] setmode
+-- @param #number mode One of the EGC constants.
+-- @param #number level in the case of node.egc.ON\_MEM\_LIMIT, this specifies the memory limit.
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
 -- The task type
 -- @type task
 
@@ -127,9 +174,9 @@
 
 -------------------------------------------------------------------------------
 -- Enable a Lua callback or task to post another task request.
--- Syntax: node.task.post([task\_priority], function)
 -- Note that as per the example multiple tasks can be posted in any task, but the highest priority is always delivered first.
 -- If the task queue is full then a queue full error is raised.
+-- Syntax: node.task.post([task\_priority], function)
 -- @function [parent=#task] post
 -- @param #number task_priority (optional) If the priority is omitted then this defaults to node.task.MEDIUM\_PRIORITY
 -- @param #function func a callback function to be executed when the task is run.

@@ -90,7 +90,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 | i2c          | full         | yes           | yes           |                                        |
 | mqtt         | full         | yes           | yes           | has some overloaded functions          |
 | net          | full\*       | yes           | yes           | \*full, except: on and send for UDP server  |
-| node         | full\*       | yes           | yes           | \*full, except: stripdebug, osprint, egc and deprecated functions |
+| node         | full\*       | yes           | yes           | \*full, except: osprint, stripdebug and deprecated functions |
 | ow (1-Wire)  | full         | yes           | yes           |                                        |
 | pwm          | full         | yes           | yes           |                                        |
 | tmr          | full         | yes           | yes           |                                        |
