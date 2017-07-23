@@ -19,7 +19,7 @@ You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use o
 ## Installation
 Download the zip file in the "release" directory of your desired NodeMCU Version of this repository or use the direct links:
 
-**Note: Old versions are usually not maintained anymore by this project.
+**Note: Old versions are usually not maintained anymore by this project.**
 
 *Old (only minimal LDT integration):*
 
@@ -27,7 +27,7 @@ Download the zip file in the "release" directory of your desired NodeMCU Version
 
 *Old (last 1.5.x was 201612):*
 
-*NodeMCU 1.5.x: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.x/release/lua5.1-nodemcu1.5.x.zip**
+*NodeMCU 1.5.x: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.x/release/lua5.1-nodemcu1.5.x.zip*
 
 **Current (recommended version):**
 
@@ -77,8 +77,7 @@ In addition you see which modules are available in the specific NodeMCU versions
 Note: The IDE doesn't know which modules are included in your custom NodeMCU firmware build.
 You will always get displayed all modules and functions for autocompletion that are integrated in the selected Execution Environment!
 
-The current (2016-06-03) version of NodeMCU Master branch is 1.5.x, the old version 1.4.0 is not supported by this project anymore.
-The old version (1.4.0) won't get updates any longer (since 2016-06-03) by this project.
+The current (2017-07-23) version of NodeMCU Master branch is 2.1.x, the old versions are not supported by this project anymore.
 
 Please use the latest version from NodeMCU to get the newest modules and functions.
 
@@ -114,7 +113,7 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 **Open an issue on github! Or fix it yourself and send a pull request!**
 
 
-## Links:
+## Links
 
 https://wiki.eclipse.org/LDT/User_Area/Tutorial/Create_a_simple_Execution_Environment
 
