@@ -10,7 +10,7 @@ LDT can be downloaded as an standalone IDE or as a part of Eclipse IDE.
 
 More Infos at: https://eclipse.org/ldt/
 
-The documentation is inherited from http://nodemcu.readthedocs.io/en/dev/en/ and https://github.com/nodemcu/nodemcu-firmware (source files).
+The documentation is inherited from https://nodemcu.readthedocs.io/en/master/ and https://github.com/nodemcu/nodemcu-firmware (source files).
 Some parts have been removed or edited.
 
 NodeMCU is a eLua based firmware for ESP8266 chips to run Lua programs.
@@ -19,13 +19,15 @@ You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use o
 ## Installation
 Download the zip file in the "release" directory of your desired NodeMCU Version of this repository or use the direct links:
 
+**Note: Old versions are usually not maintained anymore by this project.
+
 *Old (only minimal LDT integration):*
 
 *NodeMCU 1.4.0: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.4.0/release/lua5.1-nodemcu1.4.0.zip*
 
 *Old (last 1.5.x was 201612):*
 
-**NodeMCU 1.5.x: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.x/release/lua5.1-nodemcu1.5.x.zip**
+*NodeMCU 1.5.x: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.x/release/lua5.1-nodemcu1.5.x.zip**
 
 **Current (recommended version):**
 
