@@ -1,0 +1,90 @@
+-------------------------------------------------------------------------------
+-- TLS module.
+-- The TLS module depends on the net module, it is a required dependency.
+-- @module tls
+
+
+-------------------------------------------------------------------------------
+-- Creates TLS connection.
+-- @function [parent=#tls] createConnection
+-- @return #tlssocket tls.socket sub module
+
+
+-------------------------------------------------------------------------------
+-- tls.socket type
+-- @type tlssocket
+
+-------------------------------------------------------------------------------
+-- Closes socket.
+-- @function [parent=#tlssocket] close
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Connect to a remote server.
+-- Syntax: connect(port, ip|domain)
+-- @function [parent=#tlssocket] connect
+-- @param self
+-- @param #number port port number
+-- @param #string ip IP address or domain name string
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Provides DNS resolution for a hostname.
+-- Syntax: dns(domain, function(tls.socket, ip))
+-- @function [parent=#tlssocket] dns
+-- @param self
+-- @param #string domain domain name
+-- @param #function function function(tls.socket, ip) callback function. The first parameter is the socket, the second parameter is the IP address as a string.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Retrieve port and ip of peer.
+-- @function [parent=#tlssocket] getpeer
+-- @param self
+-- @return #string ip of peer
+-- @return #number port of peer
+
+-------------------------------------------------------------------------------
+-- Throttle data reception by placing a request to block the TCP receive function.
+-- This request is not effective immediately, Espressif recommends to call it while reserving 5*1460 bytes of memory.
+-- @function [parent=#tlssocket] hold
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Register callback functions for specific events.
+-- @function [parent=#tlssocket] on
+-- @param self
+-- @param #string event string, which can be "connection", "reconnection", "disconnection", "receive" or "sent"
+-- @param #function function nction(tls.socket[, string]) callback function. The first parameter is the socket. If event is "receive", the second parameter is the received data as string. If event is "reconnection", the second parameter is the reason of connection error (string).
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sends data to remote peer.
+-- @function [parent=#tlssocket] send
+-- @param self
+-- @param #string string data in string which will be sent to server
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Unblock TCP receiving data by revocation of a preceding hold().
+-- @function [parent=#tlssocket] unhold
+-- @param self
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- tls.cert type
+-- @type tlscert
+
+-------------------------------------------------------------------------------
+-- Controls the certificate verification process when the Nodemcu makes a secure connection.
+-- Syntax: tls.cert.verify(enable)
+-- 
+-- Syntax: tls.cert.verify(pemdata)
+-- @function [parent=#tlscert] verify
+-- @param #string enable_or_pemdata A boolean which indicates whether verification should be enabled or not. The default at boot is false. OR: A string containing the CA certificate to use for verification.
+-- @return #boolean true if it worked. Can throw a number of errors if invalid data is supplied.
+
+return nil

@@ -1,0 +1,185 @@
+-------------------------------------------------------------------------------
+-- mqtt module.
+-- The client adheres to version 3.1.1 of the MQTT protocol.
+-- Make sure that your broker supports and is correctly configured for version 3.1.1.
+-- The client is backwards incompatible with brokers running MQTT 3.1.
+-- @module mqtt
+
+
+-------------------------------------------------------------------------------
+-- failure: CONN\_FAIL\_SERVER\_NOT\_FOUND.
+-- There is no broker listening at the specified IP Address and Port.
+-- 
+-- Returns -5
+-- @field [parent=#mqtt] #number CONN_FAIL_SERVER_NOT_FOUND
+
+-------------------------------------------------------------------------------
+-- failure: CONN\_FAIL\_NOT\_A\_CONNACK\_MSG.
+-- The response from the broker was not a CONNACK as required by the protocol.
+-- 
+-- Returns -4
+-- @field [parent=#mqtt] #number CONN_FAIL_NOT_A_CONNACK_MSG
+
+-------------------------------------------------------------------------------
+-- failure: CONN\_FAIL\_DNS.
+-- DNS Lookup failed.
+-- 
+-- Returns -3
+-- @field [parent=#mqtt] #number CONN_FAIL_DNS
+
+-------------------------------------------------------------------------------
+-- failure: CONN\_FAIL\_TIMEOUT\_RECEIVING.
+-- Timeout waiting for a CONNACK from the broker.
+-- 
+-- Returns -2
+-- @field [parent=#mqtt] #number CONN_FAIL_TIMEOUT_RECEIVING
+
+-------------------------------------------------------------------------------
+-- failure: CONN\_FAIL\_TIMEOUT\_SENDING.
+-- Timeout trying to send the Connect message.
+-- 
+-- Returns -1
+-- @field [parent=#mqtt] #number CONN_FAIL_TIMEOUT_SENDING
+
+-------------------------------------------------------------------------------
+-- failure: CONNACK\_ACCEPTED.
+-- No errors.
+-- Note: This will not trigger a failure callback.
+-- 
+-- Returns 0
+-- @field [parent=#mqtt] #number CONNACK_ACCEPTED
+
+-------------------------------------------------------------------------------
+-- failure: CONNACK\_REFUSED\_PROTOCOL\_VER.
+-- The broker is not a 3.1.1 MQTT broker.
+-- 
+-- Returns 1
+-- @field [parent=#mqtt] #number CONNACK_REFUSED_PROTOCOL_VER
+
+-------------------------------------------------------------------------------
+-- failure: CONNACK\_REFUSED\_ID\_REJECTED.
+-- The specified ClientID was rejected by the broker. (See mqtt.Client()).
+-- 
+-- Returns 2
+-- @field [parent=#mqtt] #number CONNACK_REFUSED_ID_REJECTED
+
+-------------------------------------------------------------------------------
+-- failure: CONNACK\_REFUSED\_SERVER\_UNAVAILABLE.
+-- The server is unavailable.
+-- 
+-- Returns 3
+-- @field [parent=#mqtt] #number CONNACK_REFUSED_SERVER_UNAVAILABLE
+
+-------------------------------------------------------------------------------
+-- failure: CONNACK\_REFUSED\_BAD\_USER\_OR\_PASS.
+-- The broker refused the specified username or password.
+-- 
+-- Returns 4
+-- @field [parent=#mqtt] #number CONNACK_REFUSED_BAD_USER_OR_PASS
+
+-------------------------------------------------------------------------------
+-- failure: CONNACK\_REFUSED\_NOT\_AUTHORIZED.
+-- The username is not authorized.
+-- 
+-- Returns 5
+-- @field [parent=#mqtt] #number CONNACK_REFUSED_NOT_AUTHORIZED
+
+
+-------------------------------------------------------------------------------
+-- The MQTT Client type
+-- @type client
+
+
+-------------------------------------------------------------------------------
+-- Creates a MQTT client.
+-- Syntax: mqtt.Client(clientid, keepalive, username, password[, cleansession])
+-- @function [parent=#mqtt] Client
+-- @param #string clientid client ID
+-- @param #number keepalive keepalive seconds
+-- @param #string username user name
+-- @param #string password user password
+-- @param #number cleansession 0/1 for false/true. Default is 1 (true).
+-- @return #client MQTT client
+
+
+-------------------------------------------------------------------------------
+-- Closes connection to the broker.
+-- @function [parent=#client] close
+-- @param self
+-- @return #boolean true on success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Connects to the broker specified by the given host, port, and secure options.
+-- Syntax: connect(host[, port[, secure[, autoreconnect]]][, function(client)[, function(client, reason)]])
+-- Don't use autoreconnect.
+-- You should handle the errors explicitly and appropriately for your application.
+-- @function [parent=#client] connect
+-- @param self
+-- @param #string host host, domain or IP (string)
+-- @param #number port broker port (number), default 1883
+-- @param #number secure 0/1 for false/true, default 0. Take note of constraints documented in the net module.
+-- @param #number autoreconnect 0/1 for false/true, default 0. This option is deprecated.
+-- @param #function func function(client) callback function for when the connection was established
+-- @param #function func function(client, reason) callback function for when the connection could not be established. No further callbacks should be called.
+-- @return #boolean true on success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Setup Last Will and Testament (optional).
+-- A broker will publish a message with qos = 0, retain = 0, data = "offline" to topic "/lwt" if client does not send keepalive packet.
+-- 
+-- Syntax: lwt(topic, message[, qos[, retain]])
+-- @function [parent=#client] lwt
+-- @param self
+-- @param #string topic the topic to publish to (string)
+-- @param #string message the message to publish, (buffer or string)
+-- @param #number qos QoS level, default 0
+-- @param #number retain retain flag, default 0
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Registers a callback function for an event.
+-- Syntax: on(event, function(client[, topic[, message]]))
+-- @function [parent=#client] on
+-- @param self
+-- @param #string event can be "connect", "message" or "offline"
+-- @param #function func function(client[, topic[, message]]) callback function. The first parameter is the client. If event is "message", the 2nd and 3rd param are received topic and message (strings).
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Publishes a message.
+-- Syntax: publish(topic, payload, qos, retain[, function(client)])
+-- @function [parent=#client] publish
+-- @param self
+-- @param #string topic the topic to publish to (topic string)
+-- @param #string message the message to publish, (buffer or string)
+-- @param #number qos QoS level
+-- @param #number retain retain flag
+-- @param #function func function(client) optional callback fired when PUBACK received. NOTE: When calling publish() more than once, the last callback function defined will be called for ALL publish commands.
+-- @return #boolean true on success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Subscribes to one or several topics.
+-- Syntax: subscribe(topic, qos[, function(client)])
+-- 
+-- Syntax: subscribe(table[, function(client)])
+-- @function [parent=#client] subscribe
+-- @param self
+-- @param #string topic a topic string
+-- @param #number qos QoS subscription level, default 0
+-- @param #table table array of 'topic, qos' pairs to subscribe to
+-- @param #function func function(client) optional callback fired when subscription(s) succeeded. NOTE: When calling subscribe() more than once, the last callback function defined will be called for ALL subscribe commands.
+-- @return #boolean true on success, false otherwise
+
+-------------------------------------------------------------------------------
+-- Unsubscribes from one or several topics.
+-- Syntax: unsubscribe(topic[, function(client)])
+-- 
+-- Syntax: unsubscribe(table[, function(client)])
+-- @function [parent=#client] unsubscribe
+-- @param self
+-- @param #string topic a topic string
+-- @param #table table array of 'topic, anything' pairs to unsubscribe from
+-- @param #function func function(client) optional callback fired when unsubscription(s) succeeded. NOTE: When calling unsubscribe() more than once, the last callback function defined will be called for ALL unsubscribe commands.
+-- @return #boolean true on success, false otherwise
+
+return nil

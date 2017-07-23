@@ -1,0 +1,174 @@
+-------------------------------------------------------------------------------
+-- file module.
+-- The file module provides access to the file system and its individual files.
+-- The file system is a flat file system, with no notion of directories/folders.
+-- The file module provides several functions to access the content of a file after it has been opened with file.open().
+-- They can be used as part of a basic model or an object model:
+-- @module file
+
+
+-------------------------------------------------------------------------------
+-- File type
+-- @type fileobj
+
+
+-------------------------------------------------------------------------------
+-- Determines whether the specified file exists.
+-- @function [parent=#file] exists
+-- @param #string filename file to check
+-- @return #boolean true if the file exists (even if 0 bytes in size), and false if it does not exist
+
+-------------------------------------------------------------------------------
+-- Format the file system.
+-- Completely erases any existing file system and writes a new one.
+-- Depending on the size of the flash chip in the ESP, this may take several seconds.
+-- @function [parent=#file] format
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Returns the flash address and physical size of the file system area, in bytes.
+-- @function [parent=#file] fscfg
+-- @return #number, #number flash address, size
+
+-------------------------------------------------------------------------------
+-- Return size information for the file system, in bytes.
+-- @function [parent=#file] fsinfo
+-- @return #number, #number, #number remaining, used, total
+
+-------------------------------------------------------------------------------
+-- Lists all files in the file system.
+-- @function [parent=#file] list
+-- @return #table a lua table which contains the {file name: file size} pairs
+
+-------------------------------------------------------------------------------
+-- Opens a file for access, potentially creating it (for write modes).
+-- When done with the file, it must be closed using file.close().
+-- @function [parent=#file] open
+-- @param #string filename file to be opened, directories are not supported
+-- @param #string mode (r, w, a ,r+, w+ or a+)
+-- @return #nil if file not opened, or not exists (read modes).
+-- @return #fileobj file object if file opened ok. nil if file not opened, or not exists (read modes).
+
+-------------------------------------------------------------------------------
+-- Remove a file from the file system.
+-- The file must not be currently open.
+-- @function [parent=#file] remove
+-- @param #string filename file to remove
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Renames a file.
+-- If a file is currently open, it will be closed first.
+-- @function [parent=#file] rename
+-- @param #string oldname old file name
+-- @param #string newname new file name
+-- @return #boolean true on success, false on error.
+
+
+-------------------------------------------------------------------------------
+-- Closes the open file, if any.
+-- @function [parent=#file] close
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Closes the open file, if any.
+-- @function [parent=#fileobj] close
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Flushes any pending writes to the file system, ensuring no data is lost on a restart.
+-- Closing the open file using file.close() performs an implicit flush as well.
+-- @function [parent=#file] flush
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Flushes any pending writes to the file system, ensuring no data is lost on a restart.
+-- Closing the open file using fd:close() performs an implicit flush as well.
+-- @function [parent=#fileobj] flush
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Read content from the open file.
+-- Syntax: file.read([n\_or\_str])
+-- Default chunk size (FILE_READ_CHUNK) is 1024 bytes and is regarded to be safe.
+-- If nothing passed in, then read up to FILE_READ_CHUNK bytes or the entire file (whichever is smaller).
+-- If passed a number n, then read up to n bytes or the entire file (whichever is smaller).
+-- If passed a string containing the single character char, then read until char appears next in the file, FILE_READ_CHUNK bytes have been read, or EOF is reached.
+-- @function [parent=#file] read
+-- @param #string n_or_str nothing, number oder string
+-- @return #string File content as a string, or nil when EOF
+
+-------------------------------------------------------------------------------
+-- Read content from the open file.
+-- Syntax: fd:read([n\_or\_str])
+-- Default chunk size (FILE_READ_CHUNK) is 1024 bytes and is regarded to be safe.
+-- If nothing passed in, then read up to FILE_READ_CHUNK bytes or the entire file (whichever is smaller).
+-- If passed a number n, then read up to n bytes or the entire file (whichever is smaller).
+-- If passed a string containing the single character char, then read until char appears next in the file, FILE_READ_CHUNK bytes have been read, or EOF is reached.
+-- @function [parent=#fileobj] read
+-- @param #string n_or_str nothing, number oder string
+-- @return #string File content as a string, or nil when EOF
+
+-------------------------------------------------------------------------------
+-- Read the next line from the open file.
+-- Lines are defined as zero or more bytes ending with a EOL ('\n') byte.
+-- If the next line is longer than 1024, this function only returns the first 1024 bytes.
+-- @function [parent=#file] readline
+-- @return #string File content in string, line by line, including EOL('\n'). Return nil when EOF.
+
+-------------------------------------------------------------------------------
+-- Read the next line from the open file.
+-- Lines are defined as zero or more bytes ending with a EOL ('\n') byte.
+-- If the next line is longer than 1024, this function only returns the first 1024 bytes.
+-- @function [parent=#fileobj] readline
+-- @return #string File content in string, line by line, including EOL('\n'). Return nil when EOF.
+
+-------------------------------------------------------------------------------
+-- Sets and gets the file position, measured from the beginning of the file, to the position given by offset plus a base specified by the string whence.
+-- Syntax: file.seek([whence [, offset]]).
+-- "set": base is position 0 (beginning of the file).
+-- "cur": base is current position (default value).
+-- "end": base is end of file.
+-- @function [parent=#file] seek
+-- @param #string whence "set", "cur" or "end"
+-- @param #number offset default 0
+-- @return #number If no parameters are given, the function simply returns the current file offset. nil on error
+
+-------------------------------------------------------------------------------
+-- Sets and gets the file position, measured from the beginning of the file, to the position given by offset plus a base specified by the string whence.
+-- Syntax: fd:seek([whence [, offset]]).
+-- "set": base is position 0 (beginning of the file).
+-- "cur": base is current position (default value).
+-- "end": base is end of file.
+-- @function [parent=#fileobj] seek
+-- @param #string whence "set", "cur" or "end"
+-- @param #number offset default 0
+-- @return #number If no parameters are given, the function simply returns the current file offset. nil on error
+
+-------------------------------------------------------------------------------
+-- Write a string to the open file.
+-- @function [parent=#file] write
+-- @param #string string content to write to file
+-- @return #boolean true if write ok, nil on error
+
+-------------------------------------------------------------------------------
+-- Write a string to the open file.
+-- @function [parent=#fileobj] write
+-- @param #string string content to write to file
+-- @return #boolean true if write ok, nil on error
+
+-------------------------------------------------------------------------------
+-- Write a string to the open file and append '\n' at the end.
+-- The file must not be currently open.
+-- @function [parent=#file] writeline
+-- @param #string string content to write to file
+-- @return #boolean true if write ok, nil on error
+
+-------------------------------------------------------------------------------
+-- Write a string to the open file and append '\n' at the end.
+-- The file must not be currently open.
+-- @function [parent=#fileobj] writeline
+-- @param #string string content to write to file
+-- @return #boolean true if write ok, nil on error
+
+return nil

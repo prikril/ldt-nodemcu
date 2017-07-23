@@ -1,0 +1,244 @@
+-------------------------------------------------------------------------------
+-- node module.
+-- The node module provides access to system-level features such as sleep, restart and various info and IDs.
+-- @module node
+
+
+-------------------------------------------------------------------------------
+-- CPU80MHZ.
+-- Returns 80
+-- @field [parent=#node] #number CPU80MHZ
+
+-------------------------------------------------------------------------------
+-- CPU160MHZ.
+-- Returns 160
+-- @field [parent=#node] #number CPU160MHZ
+
+-------------------------------------------------------------------------------
+-- Interrupt mode: INT_UP.
+-- Rising edge
+-- Returns ???
+-- @field [parent=#node] #number INT_UP
+
+-------------------------------------------------------------------------------
+-- Interrupt mode: INT_DOWN.
+-- Falling edge
+-- Returns ???
+-- @field [parent=#node] #number INT_DOWN
+
+-------------------------------------------------------------------------------
+-- Interrupt mode: INT_BOTH.
+-- Both edges
+-- Returns ???
+-- @field [parent=#node] #number INT_BOTH
+
+-------------------------------------------------------------------------------
+-- Interrupt mode: INT_LOW.
+-- Low level
+-- Returns ???
+-- @field [parent=#node] #number INT_LOW
+
+-------------------------------------------------------------------------------
+-- Interrupt mode: INT_HIGH.
+-- High level
+-- Returns ???
+-- @field [parent=#node] #number INT_HIGH
+
+
+-------------------------------------------------------------------------------
+-- Returns the boot reason and extended reset info.
+-- The first value returned is the raw code (1-4).
+-- The second value returned is the extended reset cause (0-6).
+-- In general, the extended reset cause supercedes the raw code.
+-- The raw code is kept for backwards compatibility only.
+-- @function [parent=#node] bootreason
+-- @return #number, #number rawcode, reason
+
+-------------------------------------------------------------------------------
+-- Returns the ESP chip ID.
+-- @function [parent=#node] chipid
+-- @return #number chip ID (number)
+
+-------------------------------------------------------------------------------
+-- Compiles a Lua text file into Lua bytecode, and saves it as .lc file.
+-- @function [parent=#node] compile
+-- @param #string filename name of Lua text file
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Enters deep sleep mode, wakes up when timed out.
+-- The maximum sleep time is 4294967295us, ~71 minutes.
+-- This is an SDK limitation. 
+-- This function can only be used in the condition that esp8266 PIN32(RST) and PIN8(XPD\_DCDC aka GPIO16) are connected together.
+-- @function [parent=#node] dsleep
+-- @param #number us number (integer) or nil, sleep time in micro second. 0 = sleep forever. nil = will not set sleep time.
+-- @param #number option number (integer) or nil. If nil, it will use last alive setting as default option.
+-- @param #number instant number (integer) or nil. If present and non-zero, do not use the normal grace time before entering deep sleep. This is a largely undocumented feature.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Returns the flash chip ID.
+-- @function [parent=#node] flashid
+-- @return #number flash ID (number)
+
+-------------------------------------------------------------------------------
+-- Returns the flash chip size in bytes.
+-- On 4MB modules like ESP-12 the return value is 4194304 = 4096KB.
+-- @function [parent=#node] flashsize
+-- @return #number flash size in bytes (integer)
+
+-------------------------------------------------------------------------------
+-- Returns the current available heap size in bytes.
+-- Note that due to fragmentation, actual allocations of this size may not be possible.
+-- @function [parent=#node] heap
+-- @return #number system heap size left in bytes (number)
+
+-------------------------------------------------------------------------------
+-- Returns NodeMCU version, chipid, flashid, flash size, flash mode, flash speed.
+-- @function [parent=#node] info
+-- @return #number, #number, #number, #number, #number, #number, #number, #number majorVer, minorVer, devVer, chipid, flashid, flashsize, flashmode, flashspeed
+
+-------------------------------------------------------------------------------
+-- Submits a string to the Lua interpreter.
+-- Similar to pcall(loadstring(str)), but without the single-line limitation.
+-- This function only has an effect when invoked from a callback.
+-- Using it directly on the console does not work.
+-- @function [parent=#node] input
+-- @param #string str Lua chunk
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Redirects the Lua interpreter output to a callback function.
+-- Optionally also prints it to the serial console.
+-- Do not attempt to print() or otherwise induce the Lua interpreter to produce output from within the callback function.
+-- Doing so results in infinite recursion, and leads to a watchdog-triggered restart.
+-- @function [parent=#node] output
+-- @param #function output_fn(str) a function accept every output as str, and can send the output to a socket (or maybe a file).
+-- @param #number serial_debug 1: output also show in serial. 0: no serial output.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Restarts the chip.
+-- @function [parent=#node] restart
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Restores system configuration to defaults using the SDK function system\_restore(), which is described in the documentation.
+-- @function [parent=#node] restore
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Change the working CPU Frequency.
+-- @function [parent=#node] setcpufreq
+-- @param #number speed constant 'node.CPU80MHZ' or 'node.CPU160MHZ'
+-- @return #number target CPU frequency (number)
+
+-------------------------------------------------------------------------------
+-- Put NodeMCU in light sleep mode to reduce current consumption.
+-- Syntax: node.sleep({wake\_gpio[, duration, int\_type, resume\_cb, preserve\_mode]})
+-- Param is a table!
+-- @function [parent=#node] sleep
+-- @param #number duration Sleep duration in microseconds(us). If a sleep duration of 0 is specified, suspension will be indefinite (Range: 0 or 50000 - 268435454 us (0:4:28.000454))
+-- @param #number wake_pin 1-12, pin to attach wake interrupt to. Note that pin 0(GPIO 16) does not support interrupts.
+-- @param #number int_type type of interrupt that you would like to wake on. (Optional, Default: node.INT_LOW)
+-- @param #function resume_cb Callback to execute when WiFi wakes from suspension. (Optional)
+-- @param #boolean preserve_mode preserve current WiFi mode through node sleep. (Optional, Default: true) 
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- This behaves like math.random except that it uses true random numbers derived from the ESP8266 hardware.
+-- It returns uniformly distributed numbers in the required range.
+-- It also takes care to get large ranges correct.
+-- It can be called in three ways.
+-- Syntax: node.random(), node.random(n), node.random(l, u)
+-- @function [parent=#node] random
+-- @param #number n the number of distinct integer values that can be returned -- in the (inclusive) range 1 .. n
+-- @param #number l the lower bound of the range
+-- @param #number u the upper bound of the range
+-- @return #number The random number in the appropriate range. Note that the zero argument form will always return 0 in the integer build. Without arguments in the floating point build of NodeMCU, it returns a random real number with uniform distribution in the interval [0,1).
+
+
+-------------------------------------------------------------------------------
+-- The EGC type
+-- @type egc
+
+-------------------------------------------------------------------------------
+-- EGC (Emergency Garbage Collector) functions
+-- @field [parent=#node] #egc egc
+
+
+-------------------------------------------------------------------------------
+-- NOT_ACTIVE.
+-- EGC inactive, no collection cycle will be forced in low memory situations.
+-- Returns 0
+-- @field [parent=#egc] #number NOT_ACTIVE
+
+-------------------------------------------------------------------------------
+-- ON\_ALLOC\_FAILURE.
+-- Try to allocate a new block of memory, and run the garbage collector if the allocation fails.
+-- If the allocation fails even after running the garbage collector, the allocator will return with error. 
+-- Returns 1
+-- @field [parent=#egc] #number ON_ALLOC_FAILURE
+
+-------------------------------------------------------------------------------
+-- ON\_MEM\_LIMIT.
+-- Run the garbage collector when the memory used by the Lua script goes beyond an upper limit.
+-- If the upper limit can't be satisfied even after running the garbage collector, the allocator will return with error.
+-- Returns 2
+-- @field [parent=#egc] #number ON_MEM_LIMIT
+
+-------------------------------------------------------------------------------
+-- ALWAYS.
+-- Run the garbage collector before each memory allocation.
+-- If the allocation fails even after running the garbage collector, the allocator will return with error.
+-- This mode is very efficient with regards to memory savings, but it's also the slowest.
+-- Returns 4
+-- @field [parent=#egc] #number ALWAYS
+
+
+-------------------------------------------------------------------------------
+-- Sets the Emergency Garbage Collector mode.
+-- The EGC whitepaper provides more detailed information on the EGC.
+-- Syntax: node.egc.setmode(mode, [param])
+-- @function [parent=#egc] setmode
+-- @param #number mode One of the EGC constants.
+-- @param #number level in the case of node.egc.ON\_MEM\_LIMIT, this specifies the memory limit.
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- The task type
+-- @type task
+
+-------------------------------------------------------------------------------
+-- Task functions
+-- @field [parent=#node] #task task
+
+
+-------------------------------------------------------------------------------
+-- LOW_PRIORITY.
+-- Returns 0
+-- @field [parent=#task] #number LOW_PRIORITY
+
+-------------------------------------------------------------------------------
+-- MEDIUM_PRIORITY.
+-- Returns 1
+-- @field [parent=#task] #number MEDIUM_PRIORITY
+
+-------------------------------------------------------------------------------
+-- HIGH_PRIORITY.
+-- Returns 2
+-- @field [parent=#task] #number HIGH_PRIORITY
+
+
+-------------------------------------------------------------------------------
+-- Enable a Lua callback or task to post another task request.
+-- Note that as per the example multiple tasks can be posted in any task, but the highest priority is always delivered first.
+-- If the task queue is full then a queue full error is raised.
+-- Syntax: node.task.post([task\_priority], function)
+-- @function [parent=#task] post
+-- @param #number task_priority (optional) One of the task constants. If the priority is omitted then this defaults to node.task.MEDIUM\_PRIORITY
+-- @param #function function a callback function to be executed when the task is run.
+-- @return #nil
+
+return nil

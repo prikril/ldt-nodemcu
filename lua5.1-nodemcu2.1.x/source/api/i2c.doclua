@@ -1,0 +1,65 @@
+-------------------------------------------------------------------------------
+-- i2c module.
+-- @module i2c
+
+
+-------------------------------------------------------------------------------
+-- i2c speed: SLOW.
+-- Returns 100000
+-- @field [parent=#i2c] #number SLOW
+
+-------------------------------------------------------------------------------
+-- i2c direction: TRANSMITTER.
+-- Returns 0
+-- @field [parent=#i2c] #number TRANSMITTER
+
+-------------------------------------------------------------------------------
+-- i2c direction: RECEIVER.
+-- Returns 1
+-- @field [parent=#i2c] #number RECEIVER
+
+-------------------------------------------------------------------------------
+-- Setup I2C address and read/write mode for the next transfer.
+-- @function [parent=#i2c] address
+-- @param #number id always 0
+-- @param #string device_addr device address
+-- @param #number direction i2c.TRANSMITTER for writing mode , i2c. RECEIVER for reading mode
+-- @return #boolean true if ack received, false if no ack received.
+
+-------------------------------------------------------------------------------
+-- Read data for variable number of bytes.
+-- @function [parent=#i2c] read
+-- @param #number id always 0
+-- @param #number len number of data bytes
+-- @return #string string of received data
+
+-------------------------------------------------------------------------------
+-- Initialize the I2C module.
+-- @function [parent=#i2c] setup
+-- @param #number id always 0
+-- @param #number pinSDA 1~12, IO index
+-- @param #number pinSCL 1~12, IO index
+-- @param #number speed only i2c.SLOW supported
+-- @return #number speed the selected speed
+
+-------------------------------------------------------------------------------
+-- Send an I2C start condition.
+-- @function [parent=#i2c] start
+-- @param #number id always 0
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Send an I2C stop condition.
+-- @function [parent=#i2c] stop
+-- @param #number id always 0
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Write data to I2C bus. Data items can be multiple numbers, strings or lua tables.
+-- Syntax: i2c.write(id, data1[, data2[, ..., datan]])
+-- @function [parent=#i2c] write
+-- @param #number id always 0
+-- @param data data can be numbers, string or lua table
+-- @return #number number of bytes written
+
+return nil

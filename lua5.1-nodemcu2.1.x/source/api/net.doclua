@@ -1,0 +1,261 @@
+-------------------------------------------------------------------------------
+-- net module.
+-- @module net
+
+
+-------------------------------------------------------------------------------
+-- Socket type
+-- @type socket
+
+-------------------------------------------------------------------------------
+-- Closes socket.
+-- @function [parent=#socket] close
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Connect to a remote server.
+-- @function [parent=#socket] connect
+-- @param self
+-- @param #number port port number
+-- @param #string ip IP address or domain name string
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Provides DNS resolution for a hostname.
+-- Syntax: dns(domain, function(net.socket, ip))
+-- @function [parent=#socket] dns
+-- @param self
+-- @param #string domain domain name
+-- @param #function function function(net.socket, ip) callback function. The first parameter is the socket, the second parameter is the IP address as a string.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Retrieve port and ip of peer.
+-- @function [parent=#socket] getpeer
+-- @param self
+-- @return #string port of peer
+-- @return #string ip of peer
+
+-------------------------------------------------------------------------------
+-- Retrieve local port and ip of socket.
+-- @function [parent=#socket] getaddr
+-- @param self
+-- @return #string local port
+-- @return #string local ip
+
+-------------------------------------------------------------------------------
+-- Throttle data reception by placing a request to block the TCP receive function.
+-- This request is not effective immediately, Espressif recommends to call it while reserving 5*1460 bytes of memory.
+-- @function [parent=#socket] hold
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Register callback functions for specific events.
+-- Syntax: on(event, function(socket[, string]))
+-- Callback function can be nil to remove callback.
+-- @function [parent=#socket] on
+-- @param self
+-- @param #string event string, which can be "connection", "reconnection", "disconnection", "receive" or "sent"
+-- @param #function function callback function. The first parameter is the socket. If event is "receive", the second parameter is the received data as string.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sends data to remote peer.
+-- Syntax: send(string[, function(sent)])
+-- @function [parent=#socket] send
+-- @param self
+-- @param #string data in string which will be sent to server
+-- @param #function function OPTIONAL: callback function for sending string
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Changes or retrieves Time-To-Live value on socket.
+-- @function [parent=#socket] ttl
+-- @param self
+-- @param #number ttl (optional) new time-to-live value
+-- @return #number current / new ttl value
+
+-------------------------------------------------------------------------------
+-- Unblock TCP receiving data by revocation of a preceding hold().
+-- @function [parent=#socket] unhold
+-- @param self
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- UDP Socket type
+-- @type udpsocket
+
+-------------------------------------------------------------------------------
+-- Closes UDP socket.
+-- The syntax and functional identical to net.socket:close().
+-- @function [parent=#udpsocket] close
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Listen on port from IP address.
+-- Syntax: listen([port],[ip],function(socket))
+-- @function [parent=#udpsocket] listen
+-- @param self
+-- @param #number port number, can be omitted (random port will be chosen)
+-- @param #string ip IP address string, can be omitted
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Register callback functions for specific events.
+-- Syntax: on(event, function(socket[, string]))
+-- Callback function can be nil to remove callback.
+-- @function [parent=#udpsocket] on
+-- @param self
+-- @param #string event string, which can be "receive", "sent" or "dns"
+-- @param #function function callback function. The "receive" callback receives port and ip after the data argument.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sends data to remote peer.
+-- Syntax: send(string[, function(sent)])
+-- @function [parent=#udpsocket] send
+-- @param self
+-- @param #number port remote socket port
+-- @param #string ip remote socket IP
+-- @param #string data the payload to send
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Provides DNS resolution for a hostname.
+-- Syntax: dns(domain, function(net.socket, ip))
+-- @function [parent=#udpsocket] dns
+-- @param self
+-- @param #string domain domain name
+-- @param #function function function(net.socket, ip) callback function. The first parameter is the socket, the second parameter is the IP address as a string.
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Retrieve local port and ip of socket.
+-- @function [parent=#udpsocket] getaddr
+-- @param self
+-- @return #string local port
+-- @return #string local ip
+
+-------------------------------------------------------------------------------
+-- Changes or retrieves Time-To-Live value on socket.
+-- @function [parent=#udpsocket] ttl
+-- @param self
+-- @param #number ttl (optional) new time-to-live value
+-- @return #number current / new ttl value
+
+
+-------------------------------------------------------------------------------
+-- DNS type
+-- @type dns
+
+-------------------------------------------------------------------------------
+-- Gets the IP address of the DNS server used to resolve hostnames.
+-- Syntax: net.dns.getdnsserver(dns\_index)
+-- @function [parent=#dns] getdnsserver
+-- @param #number dns_index which DNS server to get (range 0~1)
+-- @return #string IP address (string) of DNS server
+
+-------------------------------------------------------------------------------
+-- Resolve a hostname to an IP address.
+-- Doesn't require a socket like net.socket.dns().
+-- Syntax: net.dns.resolve(host, function(sk, ip))
+-- @function [parent=#dns] resolve
+-- @param #string host hostname to resolve
+-- @param #function function function(sk, ip) callback called when the name was resolved. sk is always nil
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Sets the IP of the DNS server used to resolve hostnames.
+-- Default: resolver1.opendns.com (208.67.222.222).
+-- You can specify up to 2 DNS servers.
+-- @function [parent=#dns] setdnsserver
+-- @param #string dns_ip_addr IP address of a DNS server
+-- @param #string dns_index which DNS server to set (range 0~1). Hence, it supports max. 2 servers.
+-- @return #nil
+
+
+-------------------------------------------------------------------------------
+-- net.cert module.
+-- This part gone to the TLS module, link kept for backward compatibility.
+-- @field [parent=#net] #cert cert
+
+
+-------------------------------------------------------------------------------
+-- Server type
+-- @type server
+
+-------------------------------------------------------------------------------
+-- Closes the server.
+-- @function [parent=#server] close
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Listen on port from IP address.
+-- Syntax: listen([port],[ip],function(socket))
+-- @function [parent=#server] listen
+-- @param self
+-- @param #number port number, can be omitted (random port will be chosen)
+-- @param #string ip IP address string, can be omitted
+-- @param #function function callback function, pass to caller function as param if a connection is created successfully
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Returns server local address/port.
+-- @function [parent=#server] getaddr
+-- @param self
+-- @return #number local port
+-- @return #string local ip
+
+
+-------------------------------------------------------------------------------
+-- net type: TCP.
+-- Returns 0x10
+-- @field [parent=#net] #number TCP
+
+-------------------------------------------------------------------------------
+-- net type: UDP.
+-- Returns 0x20
+-- @field [parent=#net] #number UDP
+
+-------------------------------------------------------------------------------
+-- Creates a client.
+-- This will change in upcoming releases so that net.createConnection will always create an unencrypted TCP connection.
+-- @function [parent=#net] createConnection
+-- @param #number type net.TCP (default) or net.UDP
+-- @param #number secure 1 for encrypted, 0 for plain (default)
+-- @return #socket net.socket sub module, net.udpsocket sub module or tls.socket sub module
+
+-------------------------------------------------------------------------------
+-- Creates a server.
+-- The type parameter will be removed in upcoming releases so that net.createServer will always create a TCP-based server.
+-- For UDP use net.createUDPSocket() instead.
+-- @function [parent=#net] createServer
+-- @param #number type net.TCP (default) or net.UDP
+-- @param #number timeout for a TCP server timeout is 1~28'800 seconds, 30 sec by default (for an inactive client to be disconnected)
+-- @return #server net.server sub module or net.udpsocket sub module
+
+-------------------------------------------------------------------------------
+-- Creates an UDP socket.
+-- @function [parent=#net] createUDPSocket
+-- @return #udpsocket net.udpsocket sub module
+
+-------------------------------------------------------------------------------
+-- Join multicast group.
+-- @function [parent=#net] multicastJoin
+-- @param #string if_ip string containing the interface ip to join the multicast group. "any" or "" affects all interfaces.
+-- @param #string multicast_ip of the group to join
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Leave multicast group.
+-- @function [parent=#net] multicastLeave
+-- @param #string if_ip string containing the interface ip to leave the multicast group. "any" or "" affects all interfaces.
+-- @param #string multicast_ip of the group to leave
+-- @return #nil
+
+return nil

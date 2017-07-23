@@ -2,7 +2,7 @@
 
 This project integrates NodeMCU support in Lua Development Tools (LDT) as an new Execution Environment.
 
-As a result you will get an good NodeMCU IDE to write better code more easier.
+As a result you will get an good NodeMCU IDE to write better code more easy.
 
 **No debugging support! Only autocompletion (autocomplete, code completion, content assist)!**
 
@@ -16,17 +16,20 @@ Some parts have been removed or edited.
 NodeMCU is a eLua based firmware for ESP8266 chips to run Lua programs.
 You can build your custom NodeMCU firmware at http://nodemcu-build.com (or use other methods https://nodemcu.readthedocs.io/en/dev/en/build/).
 
-##Installation
+## Installation
 Download the zip file in the "release" directory of your desired NodeMCU Version of this repository or use the direct links:
 
 *Old (only minimal LDT integration):*
 
 *NodeMCU 1.4.0: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.4.0/release/lua5.1-nodemcu1.4.0.zip*
 
-**Current (recommended version):**
+*Old (last 1.5.x was 201612):*
 
 **NodeMCU 1.5.x: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu1.5.x/release/lua5.1-nodemcu1.5.x.zip**
 
+**Current (recommended version):**
+
+**NodeMCU 2.1.x: https://github.com/prikril/ldt-nodemcu/raw/master/lua5.1-nodemcu2.1.x/release/lua5.1-nodemcu2.1.x.zip**
 
 Open LDT (or Eclipse) and go to Preferences. On the left side choose "Lua".
 
@@ -44,7 +47,7 @@ Now you can click on File->New->Lua Project and select the Lua NodeMCU Execution
 
 ![Create Project](/pics/create-proj01.png?raw=true)
 
-##Install Updates
+## Install Updates
 If you want to add a new version of the NodeMCU Execution Environment, you need to remove the current one first.
 
 Select the execution environment in the list as described above. Click the "Remove" button.
@@ -53,7 +56,7 @@ Then add the new zip. (Same steps as above.)
 
 It may be necessary to restart the IDE.
 
-##Autocompletion support
+## Autocompletion support
 If your project's Execution Environment is set correctly, you will get autocompletion support for NodeMCU specific functions.
 
 ![Autocomplete](/pics/autocomplete01.png?raw=true)
@@ -64,7 +67,7 @@ Not all functions from "math" are available! Consider https://github.com/nodemcu
 
 ![Default Lua modules in NodeMCU](/pics/nodemcu-default-lua-modules01.png?raw=true)
 
-##Modules integrated
+## Modules integrated
 The following table shows the progress of integration of the NodeMCU modules for LDT.
 In addition you see which modules are available in the specific NodeMCU versions as defined by the NodeMCU developers.
 (Select "master" or "dev" branch at http://nodemcu-build.com/ and compare the available modules for more information.)
@@ -77,26 +80,28 @@ The old version (1.4.0) won't get updates any longer (since 2016-06-03) by this 
 
 Please use the latest version from NodeMCU to get the newest modules and functions.
 
-| Module       | Integration  | 1.4.0 (old)   | 1.5.x         | Comment                                |
-| ------------ |:------------:|:-------------:|:-------------:| -------------------------------------- |
-| am2320       | no           | no            | yes           |                                        |
-| bit          | full         | yes           | yes           |                                        |
-| cjson        | full         | yes           | yes           |                                        |
-| dht          | full         | yes           | yes           |                                        |
-| enduser_setup| full         | yes           | yes           |                                        |
-| file         | full         | yes           | yes           |                                        |
-| gpio         | full         | yes           | yes           |                                        |
-| http         | full         | no            | yes           |                                        |
-| i2c          | full         | yes           | yes           |                                        |
-| mqtt         | full         | yes           | yes           | has some overloaded functions          |
-| net          | full\*       | yes           | yes           | \*full, except: on and send for UDP server  |
-| node         | full\*       | yes           | yes           | \*full, except: osprint, stripdebug and deprecated functions |
-| ow (1-Wire)  | full         | yes           | yes           |                                        |
-| pwm          | full         | yes           | yes           |                                        |
-| tmr          | full         | yes           | yes           |                                        |
-| wifi         | full\*       | yes           | yes           | \*full, except: eventmon, sleep, smart |
+| Module       | Integration  | 1.4.0 (old)   | 1.5.x (old)   | 2.1.x         | Comment                                |
+| ------------ |:------------:|:-------------:|:-------------:|:-------------:| -------------------------------------- |
+| am2320       | no           | no            | yes           | yes           |                                        |
+| bit          | full         | yes           | yes           | yes           |                                        |
+| cjson        | full         | yes           | yes           | yes           |                                        |
+| dht          | full         | yes           | yes           | yes           |                                        |
+| enduser_setup| full         | yes           | yes           | yes           |                                        |
+| file         | full         | yes           | yes           | yes           | \*full, except: chdir, mount, on, stat |
+| gpio         | full         | yes           | yes           | yes           |                                        |
+| http         | full         | no            | yes           | yes           |                                        |
+| i2c          | full         | yes           | yes           | yes           |                                        |
+| mqtt         | full         | yes           | yes           | yes           | has some overloaded functions          |
+| net          | full\*       | yes           | yes           | yes           | \*full, except: on and send for UDP server  |
+| node         | full\*       | yes           | yes           | yes           | \*full, except: osprint, stripdebug and deprecated functions |
+| ow (1-Wire)  | full         | yes           | yes           | yes           |                                        |
+| pwm          | full         | yes           | yes           | yes           |                                        |
+| sjson        | full         | no            | no            | yes           | replaces cjson since 2.x               |
+| tls          | full         | no            | no            | yes           |                                        |
+| tmr          | full         | yes           | yes           | yes           |                                        |
+| wifi         | full\*       | yes           | yes           | yes           | \*full, except: eventmon, smart        |
 
-(Note: Some modules and functions are not available in NodeMCU 1.4.0 but 1.5.x e.g. `wifi.sta.getrssi()`.)
+(Note: Some modules and functions are not available in old NodeMCU versions.)
 
 * You need a module that isn't already listed here?
 
@@ -107,7 +112,8 @@ Please use the latest version from NodeMCU to get the newest modules and functio
 **Open an issue on github! Or fix it yourself and send a pull request!**
 
 
-##Links
+## Links:
+
 https://wiki.eclipse.org/LDT/User_Area/Tutorial/Create_a_simple_Execution_Environment
 
 https://wiki.eclipse.org/LDT/User_Area/Execution_Environment_file_format

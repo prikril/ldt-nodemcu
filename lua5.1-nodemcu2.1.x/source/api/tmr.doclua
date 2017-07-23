@@ -1,0 +1,222 @@
+-------------------------------------------------------------------------------
+-- Timer Module.
+-- The tmr module allows access to simple timers, the system counter and uptime.
+-- NodeMCU provides 7 static timers, numbered 0-6, and dynamic timer creation function tmr.create().
+-- Static timers are deprecated and will be removed later. Use the OO API initiated with tmr.create().
+-- @module tmr
+
+
+-------------------------------------------------------------------------------
+-- Timer mode: ALARM_AUTO automatically repeating alarm.
+-- Returns 1
+-- @field [parent=#tmr] #number ALARM_AUTO
+
+-------------------------------------------------------------------------------
+-- Timer mode: ALARM_SINGLE a one-shot alarm (and no need to call tmr.unregister()).
+-- Returns 0
+-- @field [parent=#tmr] #number ALARM_SINGLE
+
+-------------------------------------------------------------------------------
+-- Timer mode: ALARM_SEMI manually repeating alarm (call tmr.start() to restart).
+-- Returns 2
+-- @field [parent=#tmr] #number ALARM_SEMI
+
+
+-------------------------------------------------------------------------------
+-- Timer type
+-- @type timer
+
+
+-------------------------------------------------------------------------------
+-- This is a convenience function combining tmr.register() and tmr.start() into a single call.
+-- To free up the resources with this timer when done using it, call tmr.unregister() on it.
+-- @function [parent=#tmr] alarm
+-- @param #number id_ref timer id (0-6) or object
+-- @param #number interval_ms timer interval in milliseconds. Maximum value is 6870947(1:54:30.947).
+-- @param #number mode timer mode (ALARAM_SINGLE, ALARM_SEMI, ALARM_AUTO)
+-- @param #function function
+-- @return #boolean Returns true if the timer was started, false on error.
+
+-------------------------------------------------------------------------------
+-- This is a convenience function combining tmr.register() and tmr.start() into a single call.
+-- To free up the resources with this timer when done using it, call tmr.unregister() on it.
+-- @function [parent=#timer] alarm
+-- @param self
+-- @param #number interval_ms timer interval in milliseconds. Maximum value is 6870947(1:54:30.947).
+-- @param #number mode timer mode (ALARAM_SINGLE, ALARM_SEMI, ALARM_AUTO)
+-- @param #function function
+-- @return #boolean Returns true if the timer was started, false on error.
+
+-------------------------------------------------------------------------------
+-- Creates a dynamic timer object.
+-- Dynamic timer can be used instead of numeric ID in control functions.
+-- Also can be controlled in object-oriented way.
+-- @function [parent=#tmr] create
+-- @return #timer
+
+-------------------------------------------------------------------------------
+-- Busyloops the processor for a specified number of microseconds.
+-- This is in general a bad idea, because nothing else gets to run, and the networking stack (and other things) can fall over as a result.
+-- @function [parent=#tmr] delay
+-- @param #number us microseconds to busyloop for
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Changes a registered timer's expiry interval.
+-- @function [parent=#tmr] interval
+-- @param #number id_ref timer id (0-6) or object
+-- @param #number interval_ms new timer interval in milliseconds. Maximum value is 6870947 (1:54:30.947).
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Changes a registered timer's expiry interval.
+-- @function [parent=#timer] interval
+-- @param self
+-- @param #number id timer id (0-6)
+-- @param #number interval_ms new timer interval in milliseconds. Maximum value is 6870947 (1:54:30.947).
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Returns the system counter, which counts in microseconds.
+-- Limited to 31 bits, after that it wraps around back to zero.
+-- @function [parent=#tmr] now
+-- @return #number the current value of the system counter
+
+-------------------------------------------------------------------------------
+-- Configures a timer and registers the callback function to call on expiry.
+-- To free up the resources with this timer when done using it, call tmr.unregister() on it.
+-- @function [parent=#tmr] register
+-- @param #number id_ref timer id (0-6) or object
+-- @param #number interval_ms timer interval in milliseconds. Maximum value is 6870947 (1:54:30.947).
+-- @param #number mode timer mode (ALARAM_SINGLE, ALARM_SEMI, ALARM_AUTO)
+-- @param #function function callback function which is invoked with the timer object as an argument
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Configures a timer and registers the callback function to call on expiry.
+-- To free up the resources with this timer when done using it, call tmr.unregister() on it.
+-- @function [parent=#timer] register
+-- @param self
+-- @param #number interval_ms timer interval in milliseconds. Maximum value is 6870947 (1:54:30.947).
+-- @param #number mode timer mode (ALARAM_SINGLE, ALARM_SEMI, ALARM_AUTO)
+-- @param #function function callback function which is invoked with the timer object as an argument
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Resume an individual timer.
+-- Resumes a timer that has previously been suspended with either tmr.suspend or tmr.suspend_all
+-- @function [parent=#tmr] resume
+-- @param #number id_ref timer id (0-6) or object
+-- @return #boolean true if timer was resumed successfully
+
+-------------------------------------------------------------------------------
+-- Resume an individual timer.
+-- Resumes a timer that has previously been suspended with either tmr.suspend or tmr.suspend_all
+-- @function [parent=#timer] resume
+-- @param self
+-- @return #boolean true if timer was resumed successfully
+
+-------------------------------------------------------------------------------
+-- Resume all timers.
+-- Resumes all timers including those previously been suspended with either tmr.suspend or tmr.suspend_all
+-- @function [parent=#tmr] resume_all
+-- @return #boolean true if timers were resumed successfully
+
+
+-------------------------------------------------------------------------------
+-- Provides a simple software watchdog, which needs to be re-armed or disabled before it expires, or the system will be restarted.
+-- @function [parent=#tmr] softwd
+-- @param #number timeout_s watchdog timeout, in seconds. To disable the watchdog, use -1 (or any other negative value).
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Starts or restarts a previously configured timer.
+-- @function [parent=#tmr] start
+-- @param #number id_ref timer id (0-6) or object
+-- @return #boolean true if the timer was started, false on error
+
+-------------------------------------------------------------------------------
+-- Starts or restarts a previously configured timer.
+-- @function [parent=#timer] start
+-- @param self
+-- @return #boolean true if the timer was started, false on error
+
+-------------------------------------------------------------------------------
+-- Checks the state of a timer.
+-- @function [parent=#tmr] state
+-- @param #number id_ref timer id (0-6) or object
+-- @return #boolean, #number If the specified timer is registered, returns whether it is currently started and its mode.
+-- @return #nil If the timer is not registered, nil is returned.
+
+-------------------------------------------------------------------------------
+-- Checks the state of a timer.
+-- @function [parent=#timer] state
+-- @param self
+-- @return #boolean, #number If the specified timer is registered, returns whether it is currently started and its mode.
+-- @return #nil If the timer is not registered, nil is returned.
+
+-------------------------------------------------------------------------------
+-- Stops a running timer, but does not unregister it.
+-- A stopped timer can be restarted with tmr.start().
+-- @function [parent=#tmr] stop
+-- @param #number id_ref timer id (0-6) or object
+-- @return #boolean true if the timer was stopped, false on error
+
+-------------------------------------------------------------------------------
+-- Stops a running timer, but does not unregister it.
+-- A stopped timer can be restarted with tmr.start().
+-- @function [parent=#timer] stop
+-- @param self
+-- @return #boolean true if the timer was stopped, false on error
+
+-------------------------------------------------------------------------------
+-- Suspend an armed timer.
+-- Timers can be suspended at any time after they are armed.
+-- If a timer is rearmed with tmr.start or tmr.alarm any matching suspended timers will be discarded.
+-- @function [parent=#tmr] suspend
+-- @param #number id_ref timer id (0-6) or object
+-- @return #boolean true if timer was suspended successfully
+
+-------------------------------------------------------------------------------
+-- Suspend an armed timer.
+-- Timers can be suspended at any time after they are armed.
+-- If a timer is rearmed with tmr.start or tmr.alarm any matching suspended timers will be discarded.
+-- @function [parent=#timer] suspend
+-- @param self
+-- @return #boolean true if timer was suspended successfully
+
+-------------------------------------------------------------------------------
+-- Suspend all currently armed timers.
+-- This function suspends ALL active timers, including any active timers started by the NodeMCU subsystem or other modules.
+-- This may cause parts of your program to stop functioning properly.
+-- USE THIS FUNCTION AT YOUR OWN RISK!
+-- @function [parent=#tmr] suspend_all
+-- @return #boolean true if timers were suspended successfully
+
+-------------------------------------------------------------------------------
+-- Returns the system uptime, in seconds.
+-- Limited to 31 bits, after that it wraps around back to zero.
+-- @function [parent=#tmr] time
+-- @return #number the system uptime, in seconds, possibly wrapped around
+
+-------------------------------------------------------------------------------
+-- Stops the timer (if running) and unregisters the associated callback.
+-- This isn't necessary for one-shot timers (tmr.ALARM_SINGLE), as those automatically unregister themselves when fired.
+-- @function [parent=#tmr] unregister
+-- @param #number id_ref timer id (0-6) or object
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Stops the timer (if running) and unregisters the associated callback.
+-- This isn't necessary for one-shot timers (tmr.ALARM_SINGLE), as those automatically unregister themselves when fired.
+-- @function [parent=#timer] unregister
+-- @param self
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Feed the system watchdog.
+-- In general, if you ever need to use this function, you are doing it wrong.
+-- @function [parent=#tmr] wdclr
+-- @return #nil
+
+return nil

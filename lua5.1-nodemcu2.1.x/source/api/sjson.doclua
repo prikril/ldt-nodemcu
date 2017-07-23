@@ -1,0 +1,82 @@
+-------------------------------------------------------------------------------
+-- sjson module.
+-- The JSON support module.
+-- Allows encoding and decoding to/from JSON.
+-- @module sjson
+
+
+-------------------------------------------------------------------------------
+-- sjson.NULL.
+-- is used in lua structures to represent the presence of a JSON null.
+-- @field [parent=#sjson] #string NULL
+
+
+-------------------------------------------------------------------------------
+-- Encoder type
+-- @type encoder
+
+
+-------------------------------------------------------------------------------
+-- This creates an encoder object that can convert a LUA object into a JSON encoded string.
+-- @function [parent=#sjson] encoder
+-- @param #table data to encode
+-- @param #table opts an optional table of options. The possible entries are: depth, null
+-- @return #encoder A sjson.encoder object.
+
+-------------------------------------------------------------------------------
+-- This gets a chunk of JSON encoded data.
+-- @function [parent=#encoder] read
+-- @param self
+-- @param #number size an optional value for the number of bytes to return. The default is 1024.
+-- @return #string A string of up to size bytes, or nil if the encoding is complete and all data has been returned.
+
+-------------------------------------------------------------------------------
+-- Encode a Lua table to a JSON string.
+-- This is a convenience method provided for backwards compatibility with cjson.
+-- Please note that nested tables can require a lot of memory to encode.
+-- To catch out-of-memory errors, use pcall().
+-- Syntax: sjson.encode(table [, opts])
+-- @function [parent=#sjson] encode
+-- @param #table table data to encode
+-- @param #table opts an optional table of options. The possible entries are: depth, null
+-- @return #string JSON string
+
+
+-------------------------------------------------------------------------------
+-- Decoder type
+-- @type decoder
+
+
+-------------------------------------------------------------------------------
+-- This makes a decoder object that can parse a JSON encoded string into a lua object.
+-- A metatable can be specified for all the newly created lua tables.
+-- This allows you to handle each value as it is inserted into each table (by implementing the __newindex method).
+-- @function [parent=#sjson] decoder
+-- @param #table opts an optional table of options. The possible entries are: depth, null, metatable
+-- @return #decoder A sjson.decoder object.
+
+-------------------------------------------------------------------------------
+-- This provides more data to be parsed into the lua object.
+-- If a parse error occurrs during this decode, then an error is thrown and the parse is aborted. The object cannot be used again.
+-- @function [parent=#decoder] write
+-- @param #string string the next piece of JSON encoded data
+-- @return #object The constructed lua object or nil if the decode is not yet complete.
+
+-------------------------------------------------------------------------------
+-- This gets the decoded lua object, or raises an error if the decode is not yet complete.
+-- This can be called multiple times and will return the same object each time.
+-- If the decode is not complete, then an error is thrown.
+-- @function [parent=#decoder] result
+-- @return #object The decoded lua object, or raises an error if the decode is not yet complete.
+
+-------------------------------------------------------------------------------
+-- Decode a JSON string to a Lua table.
+-- This is a convenience method provided for backwards compatibility with cjson.
+-- Syntax: sjson.decode(str[, opts])
+-- If the string is not valid JSON, then an error is thrown.
+-- @function [parent=#sjson] decode
+-- @param #string str JSON string to decode
+-- @param #table opts an optional table of options. The possible entries are: depth, null, metatable
+-- @return #table Lua table representation of the JSON data
+
+return nil

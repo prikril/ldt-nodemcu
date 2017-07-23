@@ -1,0 +1,61 @@
+-------------------------------------------------------------------------------
+-- pwm module.
+-- @module pwm
+
+
+-------------------------------------------------------------------------------
+-- Quit PWM mode for the specified GPIO pin.
+-- @function [parent=#pwm] close
+-- @param #number pin 1~12, IO index
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Get selected PWM frequency of pin.
+-- @function [parent=#pwm] getclock
+-- @param #number pin 1~12, IO index
+-- @return #number PWM frequency of pin
+
+-------------------------------------------------------------------------------
+-- Get selected duty cycle of pin.
+-- @function [parent=#pwm] getduty
+-- @param #number pin 1~12, IO index
+-- @return #number duty cycle, max 1023
+
+-------------------------------------------------------------------------------
+-- Set PWM frequency.
+-- Note: Setup of the PWM frequency will synchronously change other setups as well if there are any.
+-- Only one PWM frequency can be allowed for the system.
+-- @function [parent=#pwm] setclock
+-- @param #number pin 1~12, IO index
+-- @param #number clock 1~1000, PWM frequency
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Set duty cycle for a pin.
+-- @function [parent=#pwm] setduty
+-- @param #number pin 1~12, IO index
+-- @param #number duty 0~1023, pwm duty cycle, max 1023 (10bit)
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Set pin to PWM mode.
+-- Only 6 pins can be set to PWM mode at the most.
+-- @function [parent=#pwm] setup
+-- @param #number pin 1~12, IO index
+-- @param #number clock 1~1000, pwm frequency
+-- @param #number duty 0~1023, pwm duty cycle, max 1023 (10bit)
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- PWM starts, the waveform is applied to the GPIO pin.
+-- @function [parent=#pwm] start
+-- @param #number pin 1~12, IO index
+-- @return #nil
+
+-------------------------------------------------------------------------------
+-- Pause the output of the PWM waveform.
+-- @function [parent=#pwm] stop
+-- @param #number pin 1~12, IO index
+-- @return #nil
+
+return nil
